@@ -1,0 +1,55 @@
+progress-filter {
+    ion-item:hover{
+        background-color: rgb(229, 229, 229);
+        cursor: pointer;
+    }
+    ion-icon{
+        color: #b6dde7;
+        font-weight: bold;
+        margin-top: 15px;
+        font-size: 1.5em;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    ion-icon:hover{
+        cursor: pointer;
+        color: gray;
+    }
+    table{
+        font-size: 1.08em;
+        font-weight: bold;
+        td{
+            padding: 5px;
+            border: solid 1px #FFF;
+        }
+        td:nth-child(odd){
+            width: 100px;
+            text-align: center;
+            background-color: rgb(184, 208, 229);
+        }
+        td:nth-child(even){
+            background-color: rgb(214, 214, 214);
+        }
+        button{
+            background-color: #b6dde7;
+            font-size: 1.08em;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        button:hover{
+            cursor: pointer;
+            background-color: gray;
+            color: #FFF;
+        }
+        select{
+            padding: 3px;
+        }
+    }
+    .up{
+        padding: 5px;
+    }
+    .down{
+        margin-top: 30px;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,220 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title start>{{ serial_num }}-{{ client_name }}-{{ case_name }}
+      <p id="title">{{ type_case }}＞圖資準備＞圖資索取</p>
+    </ion-title>
+    <ion-buttons end>
+      <button *ngIf='part=="a"' id="next" (click)="mail()">
+        <ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="text-align: center;" padding>
+  <div *ngIf='part=="a"' style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+    <select *ngIf="type_case=='新建工程'" [(ngModel)]="type_case1">
+      <option value="新建工程">新建工程</option>
+      <option value="增建工程">增建工程</option>
+    </select>
+    <!-- <p>圖資提供 : </p>
+    <select [(ngModel)]="company_ch" (change)='loadCompany()'>
+      <option *ngFor="let option1 of data4;let i = index;" value="{{ option1 }}" >{{option1}}</option>
+    </select>
+    <input style="min-width: 15%;" type="text" placeholder="關鍵字搜尋" [(ngModel)]="get_character" list="com_name1" required (change)='selectProvidCom1($event)'> 
+        <datalist id="com_name1">
+          <option *ngFor="let group2 of data6;let i = index;" value="{{ group2 }}" ></option>
+        </datalist> -->
+</div>
+<div *ngIf='part=="b"' style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+  <ng-container >
+        <button *ngFor="let group of bar;let i = index;"id="hTitle" id="hTitle2" [ngStyle]="{'background-color': ch_color1[i],'color': color1[i]}" ion-button (click)="chType3(i)">{{ group }}</button>
+  </ng-container>
+</div>    
+<div>
+<div *ngIf='part=="a"'> 
+  <table style="width: 100%;height: 150%;text-align: center;margin-top: 20px;">
+    <thead style="position: sticky; top:0;z-index: 10;;">
+      <tr style="background-color: #44546a;">
+        <th style="border: solid 0.5px;min-width: 20px;" rowspan="2">
+          <ion-icon *ngIf="fun==0 && click[0]==0" id="hTitle"  ios="ios-radio-button-on" md="md-radio-button-on" (click)="chType(0)"></ion-icon>
+          <ion-icon *ngIf="fun==0 && click[0]==1" id="hTitle1" ios="ios-radio-button-on" md="md-radio-button-on" (click)="chType1(0)"></ion-icon>
+          <ion-icon *ngIf="fun==1 && click[1]==0" id="hTitle"  ios="ios-radio-button-on" md="md-radio-button-on" (click)="chType(1)"></ion-icon>
+          <ion-icon *ngIf="fun==1 && click[1]==1" id="hTitle1" ios="ios-radio-button-on" md="md-radio-button-on" (click)="chType1(1)"></ion-icon>
+          <ion-icon *ngIf="fun==3 && click[3]==0" id="hTitle"  ios="ios-radio-button-on" md="md-radio-button-on" (click)="chType(3)"></ion-icon>
+          <ion-icon *ngIf="fun==3 && click[3]==1" id="hTitle1" ios="ios-radio-button-on" md="md-radio-button-on" (click)="chType1(3)"></ion-icon>
+        </th>
+        <!-- <th>序號</th> -->
+        <th style="border: solid 0.5px;" rowspan="2">類型</th>
+        <th style="border: solid 0.5px;" rowspan="2">項目</th>
+        <th style="border: solid 0.5px;" colspan="3">圖資提供</th>
+      </tr>
+      <tr style="background-color: #44546a;">
+        <th style="border: solid 0.5px;">角色</th>
+        <th style="border: solid 0.5px;">公司</th>
+        <th style="border: solid 0.5px;">承辦</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let group2 of all_paper;let i = index;">
+        <tr>
+          <td>
+            <ion-checkbox [(ngModel)]="group2['checkbox']"></ion-checkbox>
+          </td>
+          <!-- <td>{{ i+1 }}</td> -->
+          <td>{{ group2['type'] }}</td>
+          <td>{{ group2['item'] }}</td>
+          <td>
+            <select *ngIf="group2['checkbox']==1" [(ngModel)]="group2['ch']" (change)='loadCompany(group2["ch"],i,"預設")'>
+              <option *ngFor="let ch of all_ch;let a = index;" value='{{ ch }}'>{{ ch }}</option>
+            </select>
+          </td>
+          <td>
+            <!-- <select *ngIf="group2['checkbox']==1" [(ngModel)]="company[i]" (change)='selectProvidCom1($event,company[i],i)'>
+              <option *ngFor="let ch of data6[i];let a = index;" value='{{ ch }}'>{{ ch }}</option>
+            </select> -->
+            <input *ngIf="group2['checkbox']==1" style="min-width: 15%;" type="text" placeholder="關鍵字搜尋" [(ngModel)]="group2['company']" [attr.list]="'com_name1'+i" required (change)='selectProvidCom1(group2["company"],i,"預設")'> 
+            <datalist [attr.id]="'com_name1'+i">
+              <option *ngFor="let group2 of data6[i];" value="{{ group2 }}" ></option>
+            </datalist>
+          </td>
+          <td>
+            <select *ngIf="group2['checkbox']==1" [(ngModel)]="group2['person']" >
+              <option *ngFor="let p of receive_per[i];" value="{{ p }}">{{ p }}</option>
+            </select>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="all_paper_1.length > 0">
+        <tr *ngFor="let group2 of all_paper_1;let i = index;">
+          <td>
+            <ion-checkbox [(ngModel)]="group2['checkbox']"></ion-checkbox>已自訂
+          </td>
+          <!-- <td>{{ i+1 }}</td> -->
+          <td>{{ group2['type'] }}</td>
+          <td>{{ group2['item'] }}</td>
+          <td>
+            <select *ngIf="group2['checkbox']==1" [(ngModel)]="group2['ch']" (change)='loadCompany(group2["ch"],i,"已自訂")'>
+              <option *ngFor="let ch of all_ch;let a = index;" value='{{ ch }}'>{{ ch }}</option>
+            </select>
+          </td>
+          <td>
+            <!-- <select *ngIf="group2['checkbox']==1" [(ngModel)]="company[i]" (change)='selectProvidCom1($event,company[i],i)'>
+              <option *ngFor="let ch of data6[i];let a = index;" value='{{ ch }}'>{{ ch }}</option>
+            </select> -->
+            <input *ngIf="group2['checkbox']==1" style="min-width: 15%;" type="text" placeholder="關鍵字搜尋" [(ngModel)]="group2['company']" [attr.list]="'com_name3'+i" required (change)='selectProvidCom1($event,group2["company"],i,"已自訂")'> 
+            <datalist [attr.id]="'com_name3'+i">
+              <option *ngFor="let group2 of data6_2[i];" value="{{ group2 }}" ></option>
+            </datalist>
+          </td>
+          <td>
+            <select *ngIf="group2['checkbox']==1" [(ngModel)]="group2['person']" >
+              <option *ngFor="let p of receive_per_2[i];" value="{{ p }}">{{ p }}</option>
+            </select>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngFor="let group of self_add; let i = index;">
+        <tr>
+          <td>
+            <ion-checkbox (ionChange)='customizeCheck($event,i)' [(ngModel)]="add_data[i].checkbox"></ion-checkbox>自訂
+          </td>
+          <td>
+            <input [(ngModel)]="add_data[i].type" *ngIf="add_data[i].checkbox == true" type="text" placeholder="請輸入類型">
+          </td>
+          <td>
+            <input [(ngModel)]="add_data[i].item" *ngIf="add_data[i].checkbox == true" type="text" placeholder="請輸入項目">
+          </td>
+          <td>
+            <select [(ngModel)]="add_data[i].ch" *ngIf="add_data[i].checkbox == true" (change)='loadCompany(add_data[i].ch,i,"自訂")'>
+              <option *ngFor="let ch of all_ch;let a = index;" value='{{ ch }}'>{{ ch }}</option>
+            </select>
+          </td>
+          <td>
+            <input *ngIf="add_data[i].checkbox == true" style="min-width: 15%;" type="text" placeholder="關鍵字搜尋" [(ngModel)]="add_data[i].company" [attr.list]="'com_name2'+i" required (change)='selectProvidCom1($event,add_data[i].company,i,"自訂")'> 
+            <datalist [attr.id]="'com_name2'+i">
+              <option *ngFor="let group2 of data6_1[i];" value="{{ group2 }}" ></option>
+            </datalist>
+            <!-- <select [(ngModel)]="add_data[i].company" *ngIf="add_data[i].checkbox == true">
+              <option *ngFor="let ch of all_ch;let a = index;" value='{{ ch }}'>{{ ch }}</option>
+            </select> -->
+          </td>
+          <td>
+            <select *ngIf="add_data[i].checkbox == true" [(ngModel)]="add_data[i].person">
+              <option *ngFor="let p of receive_per_1[i];" value="{{ p }}">{{ p }}</option>
+            </select>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+<div *ngIf='part=="b"'>
+  <table style="width: 95%;text-align: center;margin-top: 10px;margin-left: auto;margin-right: auto;margin-bottom: 30px;">
+    <thead>
+      <tr style="background-color: #44546a;border: rgb(163,171,184) solid 1px;">
+        <th>收件人</th>
+        <th style="color: white;">{{ C_name }}</th>
+      </tr>
+      <tr style="background-color: #44546a;border: rgb(163,171,184) solid 1px;">
+        <th>副本<ion-icon ios="ios-people" md="md-people" style="cursor: pointer;" (click)="chooseMail()"></ion-icon></th>
+        <th style="color: white;">{{ C_name2 }}</th>
+      </tr>
+      <tr style="background-color: #44546a;border: rgb(163,171,184) solid 1px;">
+        <th>主旨</th>
+        <th>
+          <!-- <input style="width: 70%;border: none;text-align-last:left;color: black;" [(ngModel)]="subject"  placeholder="請輸入..." type="text"> -->
+          {{ client_name }} - {{ type_case }}消防審查作業圖資索取需求
+        </th>
+      </tr>
+        <tr style="background-color: #44546a;border: rgb(163,171,184) solid 1px;">
+          <th colspan="2">內文　
+            <ion-icon class="copy" ios="ios-copy" md="md-copy" (click)="copyContent(textarea_c)">
+              <span id="custom-tooltip">copied</span>
+            </ion-icon>
+          </th>
+      </tr>
+      <tr style="height: 10em;">
+        <td colspan="2">
+          <textarea #textarea_c style="width: 100%;height: 20em;resize: none;border: none;text-align-last:left ;color: black;background-color: rgb(232,233,234);" [(ngModel)]="content" placeholder="請輸入..."></textarea>
+        </td>
+      </tr>
+      <tr style="border: solid 1px white;background-color: white;">
+        <td style="border: solid 1px white;" colspan="2">
+          <button id="sendto" (click)="sendMail()">送出</button>
+        </td>
+      </tr>
+      </thead>
+    </table>
+    </div>
+    <div *ngIf="part=='c'">
+      <table style="width: 95%;text-align: center;margin-top: 100px;margin-left: auto;margin-right: auto;">
+        <thead>
+          <tr style="background-color: #44546a;border: rgb(163,171,184) solid 1px;">
+            <td>階段作業　備註</td>
+            </tr>
+        </thead>
+        <tbody>
+          <tr style="height: 10em;">
+            <td>
+              <textarea style="width: 100%;height: 20em;resize: none;border: none;text-align-last:left ;color: black;background-color: rgb(232,233,234);" [(ngModel)]="section_note" placeholder="請輸入..."></textarea>
+            </td>
+          </tr>
+          <tr style="border: solid 1px white;background-color: white;">
+            <td style="border: solid 1px white;">
+              <button id="sendto" (click)="saveSectionNote()">確定</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+  <button *ngIf='part=="a"' id="add_item" (click)="pushCdd()"><ion-icon ios="ios-add" md="md-add"></ion-icon></button>
+  <button *ngIf='part=="a" && all_paper_1.length > 0 || part=="a" && add_data.length > 0 ' id="add_item" (click)="removeAdd()"><ion-icon ios="ios-remove" md="md-remove"></ion-icon></button>
+  
+  <button *ngIf='part=="b"' id="next2" (click)="mail2()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon></button>
+  <button *ngIf='part=="b"' id="next3" (click)="note()"><ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon></button>
+  
+  <button *ngIf='part=="c"' id="next2" (click)="back_mail()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon></button>
+</ion-content>

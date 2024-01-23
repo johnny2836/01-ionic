@@ -1,0 +1,97 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button  ion-button icon-only (click)="openFirst($event)">
+        <ion-icon name="md-settings" ></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="logout()">
+        <ion-icon name="md-exit"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title start>熙 特 爾 數 位 經 營 管 理</ion-title>
+  </ion-navbar>
+    <ion-item>
+      <!-- 案件類型 -->
+      <div style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+        <button id="hTitle" [ngStyle]="{'background-color': ch_color[0],'color': color[0]}" ion-button (click)="chType(0)">客戶名冊</button>
+        <button id="hTitle" [ngStyle]="{'background-color': ch_color[1],'color': color[1]}" ion-button (click)="chType(1)">通訊錄</button>
+      </div>
+      </ion-item>
+</ion-header>
+
+<ion-content padding>
+<div *ngIf='chv==0'>
+  <table id="table" style="padding-bottom: 50px;margin-bottom:50px;">
+    <thead>
+      <tr>
+        <th style="min-width: 40px;">客戶編號
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </th>
+        <th style="min-width: 80px !important;">新編號
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </th>
+        <th style="min-width: 100px !important;">客戶名稱
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </th>
+        <th>類組</th>
+        <th>實際用途</th>
+        <th>電話</th>
+        <th>結帳類別</th>
+        <th>公司地址</th>
+        <th>聯絡人</th>
+        <th>傳真</th>
+        <th>統一編號</th>
+        <th>送貨地址</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor='let group2 of all_data;let i = index'>
+        <tr id="tr_hover" style="text-align: center;">
+          <th id="all_data">{{ group2[0] }}</th>
+          <th id="all_data">{{ group2[1] }}</th>
+          <th id="all_data">{{ group2[2] }}</th>
+          <th id="all_data">{{ group2[3] }}</th>
+          <th id="all_data">{{ group2[4] }}</th>
+          <th id="all_data">{{ group2[5] }}</th>
+          <th id="all_data">{{ group2[6] }}</th>
+          <th id="all_data">{{ group2[7] }}</th>
+          <th id="all_data">{{ group2[8] }}</th>
+          <th id="all_data">{{ group2[9] }}</th>
+          <th id="all_data">{{ group2[10] }}</th>
+          <th id="all_data">{{ group2[11] }}</th>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <ion-infinite-scroll *ngIf="spin==0" (ionInfinite)="doInfiniteAll($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
+<div *ngIf='chv==1'>
+  <table id="table" style="padding-bottom: 50px;margin-bottom:50px;">
+    <thead>
+      <tr>
+        <th style="min-width: 40px;">部門
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </th>
+        <th style="min-width: 80px !important;">姓名</th>
+        <th style="min-width: 100px !important;">職稱</th>
+        <th>手機</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor='let group2 of contact;let i = index'>
+        <tr id="tr_hover" style="text-align: center;">
+          <th id="all_data">{{ group2[0] }}</th>
+          <th id="all_data">{{ group2[1] }}</th>
+          <th id="all_data">{{ group2[2] }}</th>
+          <th id="all_data">{{ group2[3] }}</th>
+          <th id="all_data">{{ group2[4] }}</th>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+</ion-content>

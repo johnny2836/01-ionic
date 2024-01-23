@@ -1,0 +1,63 @@
+page-all-info {
+    .toolbar-md{
+        padding: 0px;
+      }
+    .toolbar-title-md{
+        color: black;
+        font-size: 2em;
+        font-weight: 400;
+        font-family: '微軟正黑體';
+    }
+    #hTitle{
+        margin-top:2px;
+        margin-right:10px;
+        font-size:1.08em;
+        width:100px;
+        float: left;
+        border-radius:2px;
+        height: 28px;
+        font-weight:400;
+        color: black;
+      }
+      #table{
+        width:100%;
+        font-size:1.4vh;
+        @media (min-width: 768px) {
+          font-size:1.6vh;
+          width:100%;
+          margin-left:auto;
+          margin-right:auto;
+          }  
+      }
+      thead th {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: -10px;
+        background:rgb(68,84,106);
+        color: #FFF;
+        min-width: 150px;
+        border: white solid 1px;
+        border-bottom: white solid 4px;
+        height: 40px;
+      }
+      #tr_hover:hover{
+        background-color: rgb(155, 160, 168);
+        height: 45px;
+      }
+      tr:nth-child(odd){
+        background:rgb(205,207,211);
+        height: 42px;
+      }
+      tr:nth-child(even){
+        background:rgb(232,233,234);
+        height: 42px;
+      }
+      
+      #all_data{
+        border: solid white 1px;
+        white-space: nowrap;
+      }
+      .scroll-content{
+        overflow-x: auto;
+      }
+}

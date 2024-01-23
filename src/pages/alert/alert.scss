@@ -1,0 +1,25 @@
+page-alert {
+    table{
+        width: 100%;
+        text-align: center;
+    }
+    tbody tr:nth-child(odd){
+        background:rgb(205,207,211);
+        height: 42px;
+        font-size: 1.08em;
+    }
+    tbody tr:nth-child(even){
+        background:rgb(232,233,234);
+        height: 42px;
+        font-size: 1.08em;
+    }
+    thead{
+        color: #FFF;
+        background-color: rgb(68,84,106);
+        height: 50px;
+        font-size: 1.2em;
+    }
+    th, td{
+        border: #FFF 1px solid;
+    }
+}

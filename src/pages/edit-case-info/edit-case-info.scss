@@ -1,0 +1,42 @@
+page-edit-case-info {
+    button{
+        height: 40px;
+        width: 60px;
+        font-size: 15px;
+        background: none;
+    }
+    button:hover{
+        background-color: rgb(228, 228, 228);
+    }
+    table{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        height: auto;
+    }
+    thead{
+        background-color: rgb(68,84,106);
+        color: white;
+        height: 50px;
+        font-size: 15px;
+    }
+    tr:nth-child(odd){
+        text-align: center;
+        background:rgb(205,207,211);
+        height: 55px;
+      }
+    tr:nth-child(even){
+        text-align: center;
+        background:rgb(232,233,234);
+        height: 55px;
+      }
+    td{
+        border: solid 1px rgb(68,84,106);
+    }
+    input{
+        width: 95%;
+    }
+    select{
+        width: 100%;
+    }
+}

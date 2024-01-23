@@ -1,0 +1,48 @@
+page-type6 {
+  .type-button {
+    margin: 5px 10px 5px 10px;
+    font-size: 1.08em;
+    width: 130px;
+    float: left;
+    border-radius: 2px;
+    height: 35px;
+    font-weight: bolder;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    background-color: rgb(218, 218, 218);
+  }
+  .type-button1 {
+    margin: 5px 10px 5px 10px;
+    font-size: 1.08em;
+    width: 130px;
+    float: left;
+    border-radius: 2px;
+    height: 35px;
+    font-weight: bolder;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    background-color: rgb(218, 218, 218);
+  }
+  .type-button:first-child {
+    background-color: #e98f91;
+  }
+  .type-button:nth-child(2) {
+    background-color: #e98f91;
+  }
+  .type-button:nth-child(3) {
+    background-color: #e98f91;
+  }
+  .type-button:nth-child(4) {
+    background-color: #a7d7df;
+  }
+  .type-button:nth-child(5) {
+    background-color: #e8bb89;
+  }
+  .type-button:nth-child(6) {
+    background-color: #a4d793;
+  }
+  .button1 {
+    color: rgb(255, 255, 255);
+    background-color: rgb(68, 84, 106);
+  }
+}

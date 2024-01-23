@@ -1,0 +1,64 @@
+page-add-new {
+    .scroll-content{
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    textarea{
+      width: 98%;
+      height: 12em;
+      // resize: none;
+      border: none;
+      text-align-last:left ;
+      background-color: rgb(255, 255, 255);
+      padding: 5px;
+    }
+    table{
+        width:90%;
+        height: 90%;
+        font-size:16.5px;
+        margin-top: 20px;
+        margin-left:auto;
+        margin-right:auto;
+        @media (min-width: 768px) {
+          font-size:16.5px;
+          width:90%;
+          margin-left:auto;
+          margin-right:auto;
+          }  
+      }
+        th {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        background:rgb(68,84,106);
+        color: #FFF;
+        height: 50px;
+        min-width: 150px;
+        border: white solid 1px;
+      }
+      tr:nth-child(odd){
+        background:rgb(205,207,211);
+        height: 42px;
+        border: white solid 1px;
+      }
+      tr:nth-child(even){
+        background:rgb(232,233,234);
+        height: 42px;
+        border: white solid 1px;
+      }
+      input{
+        max-width: 200% !important
+        
+      }
+      #edit{
+        top: 10px;
+        font-size:1.08em;
+        width: 80px;
+        height: 28px;
+        background-color: rgb(205,207,211);
+        color: black;
+      }
+      #edit:hover{
+        background-color:rgb(68,84,106);
+        color: white;
+      }
+}

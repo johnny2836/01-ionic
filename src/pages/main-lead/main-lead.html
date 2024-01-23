@@ -1,0 +1,193 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons end>
+      <button id="bms_go" (click)="bmsGo()">
+        <img src="assets/imgs/camera.png" alt="" />
+      </button>
+      <button ion-button icon-only (click)="openAlert()">
+        <ion-icon
+          *ngIf="alert_status;else noAlert"
+          name="notifications"
+          class="spark"
+        >
+        </ion-icon>
+        <ng-template #noAlert>
+          <ion-icon name="notifications"></ion-icon>
+        </ng-template>
+      </button>
+      <button ion-button icon-only (click)="openFirst()">
+        <ion-icon name="md-settings"></ion-icon>
+      </button>
+      <p>使用者：{{ depart }}-{{ user }}</p>
+    </ion-buttons>
+    <ion-title start>熙 特 爾 數 位 經 營 管 理</ion-title>
+  </ion-navbar>
+
+  <ion-item
+    style="
+      border-bottom: rgb(180, 180, 180) solid 1px;
+      background-color: rgb(248, 248, 248);
+      min-height: 135px !important;
+    "
+  >
+    <!-- 第一層 -->
+    <div style="display: flex; width: 100%; justify-content: space-between">
+      <div>
+        <button class="type-button1" (click)="chType(0,'')">案件總覽</button>
+        <button class="type-button" (click)="chType(1,'儲能案場-配電')">
+          儲能案場-配電
+        </button>
+        <button class="type-button" (click)="chType(2,'儲能案場-輸電')">
+          儲能案場-輸電
+        </button>
+        <button class="type-button" (click)="chType(3,'光電儲能')">
+          光電儲能
+        </button>
+        <button class="type-button" (click)="chType(4,'產學合作')">
+          產學合作
+        </button>
+        <button class="type-button" (click)="chType(5,'營運管理')">
+          營運管理
+        </button>
+        <button class="type-button" (click)="chType(6,'生產製造')">
+          生產製造
+        </button>
+      </div>
+      <div
+        style="display: flex; justify-content: end"
+        *ngIf="first_button !== 0"
+      >
+        <button class="type-button1">新增</button>
+        <button class="type-button1">刪除</button>
+      </div>
+    </div>
+  </ion-item>
+</ion-header>
+
+<ion-content padding>
+  <!-- 案件總表 進度總表 -->
+  <div *ngIf="first_button === 0">
+    <table id="table">
+      <thead>
+        <tr>
+          <th *ngIf="progress_array[3]==0" id="td_static">
+            類型
+            <ion-icon
+              name="md-arrow-dropdown"
+              (click)="FilterPopOver($event,3,'進度總表-類型')"
+            ></ion-icon>
+          </th>
+          <th id="td_static">客戶</th>
+          <th id="td_static">場所</th>
+          <th id="td_static">主階段</th>
+          <th id="td_static">子階段</th>
+          <th id="td_static">主辦</th>
+          <th id="td_static">協辦</th>
+          <th>任務指派</th>
+          <th>訊息通知</th>
+          <th>推播狀態</th>
+          <th>主辦接收</th>
+          <th>協辦接收</th>
+          <th>預計開始</th>
+          <th>預計完成</th>
+          <th>主辦完成</th>
+          <th>協辦完成</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let group2 of all_data_1;let i = index">
+          <tr id="tr_hover" *ngIf="i%2==0;else an" style="text-align: center">
+            <td id="td_static1">{{ group2.AD_type }}</td>
+            <td id="td_static1">{{ group2.AD_client_name }}</td>
+            <td id="td_static1">{{ group2.AD_case_name }}</td>
+            <td id="td_static1">{{ group2.AD_main_section }}</td>
+            <td id="td_static1">{{ group2.AD_sec_section }}</td>
+            <td id="td_static1">{{ group2.AD_main }}</td>
+            <td id="td_static1">{{ group2.AD_assis }}</td>
+            <td id="all_data">{{ group2.AD_create_time }}</td>
+            <td id="all_data">{{ group2.AD_mission_alert }}</td>
+            <td id="all_data">{{ group2.AD_mission_line }}</td>
+            <td id="all_data">{{ group2.AD_actual_receive_main }}</td>
+            <td id="all_data">{{ group2.AD_actual_receive_assis }}</td>
+            <td id="all_data">{{ group2.AD_mission_start }}</td>
+            <td id="all_data">{{ group2.AD_mission_complete }}</td>
+            <td id="all_data">{{ group2.AD_finish_callback_main }}</td>
+            <td id="all_data">{{ group2.AD_finish_callback_assis }}</td>
+          </tr>
+          <ng-template #an>
+            <tr id="tr_hover1" style="text-align: center">
+              <td id="td_static2">{{ group2.AD_type }}</td>
+              <td id="td_static2">{{ group2.AD_client_name }}</td>
+              <td id="td_static2">{{ group2.AD_case_name }}</td>
+              <td id="td_static2">{{ group2.AD_main_section }}</td>
+              <td id="td_static2">{{ group2.AD_sec_section }}</td>
+              <td id="td_static2">{{ group2.AD_main }}</td>
+              <td id="td_static2">{{ group2.AD_assis }}</td>
+              <td id="all_data">{{ group2.AD_create_time }}</td>
+              <td id="all_data">{{ group2.AD_mission_alert }}</td>
+              <td id="all_data">{{ group2.AD_mission_line }}</td>
+              <td id="all_data">{{ group2.AD_actual_receive_main }}</td>
+              <td id="all_data">{{ group2.AD_actual_receive_assis }}</td>
+              <td id="all_data">{{ group2.AD_mission_start }}</td>
+              <td id="all_data">{{ group2.AD_mission_complete }}</td>
+              <td id="all_data">{{ group2.AD_finish_callback_main }}</td>
+              <td id="all_data">{{ group2.AD_finish_callback_assis }}</td>
+            </tr>
+          </ng-template>
+        </ng-container>
+      </tbody>
+    </table>
+    <ion-infinite-scroll (ionInfinite)="doInfiniteAll($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="first_button === 1">
+    <table id="table">
+      <thead>
+        <th>案件</th>
+        <th>開案階段</th>
+        <th>開發許可階段</th>
+        <th>規劃設計階段</th>
+        <th>施工階段</th>
+        <th>驗證上線階段</th>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let group of distribution_case;let i = index">
+          <tr id="tr_hover1" style="text-align: center">
+            <td id="td_static1">{{group[0]}}</td>
+            <td id="td_static1">
+              <ion-icon
+                name="radio-button-on"
+                (click)="chType0(0,group[0],group[1])"
+              ></ion-icon>
+            </td>
+            <td id="td_static1">
+              <ion-icon
+                name="radio-button-on"
+                (click)="chType0(1,group[0],group[1])"
+              ></ion-icon>
+            </td>
+            <td id="td_static1">
+              <ion-icon
+                name="radio-button-on"
+                (click)="chType0(2,group[0],group[1])"
+              ></ion-icon>
+            </td>
+            <td id="td_static1">
+              <ion-icon
+                name="radio-button-on"
+                (click)="chType0(3,group[0],group[1])"
+              ></ion-icon>
+            </td>
+            <td id="td_static1">
+              <ion-icon
+                name="radio-button-on"
+                (click)="chType0(4,group[0],group[1])"
+              ></ion-icon>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

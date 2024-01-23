@@ -1,0 +1,424 @@
+<!--
+  Generated template for the AssignMissionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title start
+      >{{ case_type }} : {{ client_name }} - {{ case_name }}
+      <p id="title">案件總覽＞任務指派</p>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="text-align: center" padding>
+  <table *ngIf="table_status == '其他'">
+    <thead>
+      <tr>
+        <ng-container *ngFor="let bar of bar1; let i =index;">
+          <th>{{ bar }}</th>
+        </ng-container>
+        <!-- <ng-container *ngFor='let bar of bar2; let i =index;'>
+          <th id="section_odd">{{ bar }}</th>
+        </ng-container> -->
+        <th style="min-width: 30px">設定</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>協辦</th>
+      </tr>
+      <!-- <tr>
+        <ng-container *ngFor='let bar of bar1; let i =index;'>
+          <th id="th_odd">設定</th>
+          <th id="th_odd">主辦</th>
+          <th id="th_even">設定</th>
+          <th id="th_even">部門</th>
+          <th id="th_even">主辦</th>
+          <th id="th_even">協辦</th>
+        </ng-container>
+      </tr> -->
+    </thead>
+    <tbody>
+      <tr id="tr_odd1">
+        <th rowspan="3">{{ bar5[0] }}</th>
+        <th>圖資索取</th>
+        <th>
+          <ion-icon
+            name="md-radio-button-on"
+            (click)='setting(bar5[0],"圖資索取")'
+          ></ion-icon>
+        </th>
+        <th>{{ a1 }}</th>
+        <th *ngIf="ar_a1==1;">{{ a2 }}</th>
+        <th *ngIf="ar_a1==0;" style="color: blue">{{ a2 }}</th>
+        <th *ngIf="ar_a1==1;">{{ a3 }}</th>
+        <th *ngIf="ar_a1==0;" style="color: blue">{{ a3 }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_a; let i =index;">
+        <tr id="tr_odd1">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[0],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ aa1[i] }}</th>
+          <th *ngIf="ar_aa1[i]==1;">{{ aa2[i] }}</th>
+          <th *ngIf="ar_aa1[i]==0;" style="color: blue">{{ aa2[i] }}</th>
+          <th *ngIf="ar_aa1[i]==1;">{{ aa3[i] }}</th>
+          <th *ngIf="ar_aa1[i]==0;" style="color: blue">{{ aa3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd">
+        <th rowspan="2">{{ bar5[1] }}</th>
+        <th>{{ bar4_a_1[0] }}</th>
+        <th>
+          <ion-icon
+            name="md-radio-button-on"
+            (click)="setting(bar5[1],bar4_a_1[0])"
+          ></ion-icon>
+        </th>
+        <th>{{ b1 }}</th>
+        <th *ngIf="ar_b1==1;">{{ b2 }}</th>
+        <th *ngIf="ar_b1==0;" style="color: blue">{{ b2 }}</th>
+        <th *ngIf="ar_b1==1;">{{ b3 }}</th>
+        <th *ngIf="ar_b1==0;" style="color: blue">{{ b3 }}</th>
+      </tr>
+      <tr id="tr_odd">
+        <th>{{ bar4_a_1[1] }}</th>
+        <th>
+          <ion-icon
+            name="md-radio-button-on"
+            (click)="setting(bar5[1],bar4_a_1[1])"
+          ></ion-icon>
+        </th>
+        <th>{{ bb1 }}</th>
+        <th *ngIf="ar_bb1==1;">{{ bb2 }}</th>
+        <th *ngIf="ar_bb1==0;" style="color: blue">{{ bb2 }}</th>
+        <th *ngIf="ar_bb1==1;">{{ bb3 }}</th>
+        <th *ngIf="ar_bb1==0;" style="color: blue">{{ bb3 }}</th>
+      </tr>
+      <tr id="tr_odd1">
+        <th rowspan="6">{{ bar5[2] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_b; let i =index;">
+        <tr id="tr_odd1">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[2],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ c1[i] }}</th>
+          <th *ngIf="ar_c1[i]==1;">{{ c2[i] }}</th>
+          <th *ngIf="ar_c1[i]==0;" style="color: blue">{{ c2[i] }}</th>
+          <th *ngIf="ar_c1[i]==1;">{{ c3[i] }}</th>
+          <th *ngIf="ar_c1[i]==0;" style="color: blue">{{ c3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd">
+        <th rowspan="8">{{ bar5[3] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_c; let i =index;">
+        <tr id="tr_odd">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[3],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ d1[i] }}</th>
+          <th *ngIf="ar_d1[i]==1;">{{ d2[i] }}</th>
+          <th *ngIf="ar_d1[i]==0;" style="color: blue">{{ d2[i] }}</th>
+          <th *ngIf="ar_d1[i]==1;">{{ d3[i] }}</th>
+          <th *ngIf="ar_d1[i]==0;" style="color: blue">{{ d3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd1">
+        <th rowspan="2">現場勘查</th>
+      </tr>
+      <tr id="tr_odd1">
+        <th>尺寸丈量</th>
+        <th>
+          <ion-icon
+            name="md-radio-button-on"
+            (click)='setting("現場勘查","尺寸丈量")'
+          ></ion-icon>
+        </th>
+        <th>{{ dd1 }}</th>
+        <th *ngIf="dd4==1;">{{ dd2 }}</th>
+        <th *ngIf="dd4==0;" style="color: blue">{{ dd2 }}</th>
+        <th *ngIf="dd4==1;">{{ dd3 }}</th>
+        <th *ngIf="dd4==0;" style="color: blue">{{ dd3 }}</th>
+      </tr>
+      <tr id="tr_odd">
+        <th rowspan="4">{{ bar5[4] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_d; let i =index;">
+        <tr id="tr_odd">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[4],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ e1[i] }}</th>
+          <th *ngIf="ar_e1[i]==1;">{{ e2[i] }}</th>
+          <th *ngIf="ar_e1[i]==0;" style="color: blue">{{ e2[i] }}</th>
+          <th *ngIf="ar_e1[i]==1;">{{ e3[i] }}</th>
+          <th *ngIf="ar_e1[i]==0;" style="color: blue">{{ e3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd1">
+        <th rowspan="5">{{ bar5[5] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_e; let i =index;">
+        <tr id="tr_odd1">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[5],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ f1[i] }}</th>
+          <th *ngIf="ar_f1[i]==1;">{{ f2[i] }}</th>
+          <th *ngIf="ar_f1[i]==0;" style="color: blue">{{ f2[i] }}</th>
+          <th *ngIf="ar_f1[i]==1;">{{ f3[i] }}</th>
+          <th *ngIf="ar_f1[i]==0;" style="color: blue">{{ f3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd">
+        <th rowspan="3">{{ bar5[6] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_f; let i =index;">
+        <tr id="tr_odd">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[6],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ g1[i] }}</th>
+          <th *ngIf="ar_g1[i]==1;">{{ g2[i] }}</th>
+          <th *ngIf="ar_g1[i]==0;" style="color: blue">{{ g2[i] }}</th>
+          <th *ngIf="ar_g1[i]==1;">{{ g3[i] }}</th>
+          <th *ngIf="ar_g1[i]==0;" style="color: blue">{{ g3[i] }}</th>
+        </tr>
+      </ng-container>
+
+      <tr id="tr_odd1">
+        <th rowspan="4">{{ bar5[7] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_g; let i =index;">
+        <tr id="tr_odd1">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[7],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ h1[i] }}</th>
+          <th *ngIf="ar_h1[i]==1;">{{ h2[i] }}</th>
+          <th *ngIf="ar_h1[i]==0;" style="color: blue">{{ h2[i] }}</th>
+          <th *ngIf="ar_h1[i]==1;">{{ h3[i] }}</th>
+          <th *ngIf="ar_h1[i]==0;" style="color: blue">{{ h3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd">
+        <th rowspan="6">{{ bar5[8] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_h; let i =index;">
+        <tr id="tr_odd">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[8],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ i1[i] }}</th>
+          <th *ngIf="ar_i1[i]==1;">{{ i2[i] }}</th>
+          <th *ngIf="ar_i1[i]==0;" style="color: blue">{{ i2[i] }}</th>
+          <th *ngIf="ar_i1[i]==1;">{{ i3[i] }}</th>
+          <th *ngIf="ar_i1[i]==0;" style="color: blue">{{ i3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd1">
+        <th rowspan="6">{{ bar5[9] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_i; let i =index;">
+        <tr id="tr_odd1">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[9],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ j1[i] }}</th>
+          <th *ngIf="ar_j1[i]==1;">{{ j2[i] }}</th>
+          <th *ngIf="ar_j1[i]==0;" style="color: blue">{{ j2[i] }}</th>
+          <th *ngIf="ar_j1[i]==1;">{{ j3[i] }}</th>
+          <th *ngIf="ar_j1[i]==0;" style="color: blue">{{ j3[i] }}</th>
+        </tr>
+      </ng-container>
+      <tr id="tr_odd">
+        <th rowspan="3">{{ bar5[10] }}</th>
+      </tr>
+      <ng-container *ngFor="let bar of bar4_j; let i =index;">
+        <tr id="tr_odd">
+          <th>{{ bar }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(bar5[10],bar)"
+            ></ion-icon>
+          </th>
+          <th>{{ k1[i] }}</th>
+          <th *ngIf="ar_k1[i]==1;">{{ k2[i] }}</th>
+          <th *ngIf="ar_k1[i]==0;" style="color: blue">{{ k2[i] }}</th>
+          <th *ngIf="ar_k1[i]==1;">{{ k3[i] }}</th>
+          <th *ngIf="ar_k1[i]==0;" style="color: blue">{{ k3[i] }}</th>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <table *ngIf="table_status == '檢修'">
+    <thead>
+      <tr>
+        <th>階段</th>
+        <th style="min-width: 30px">設定</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>協辦</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let group of barA;let i = index">
+        <tr id="tr_odd1" *ngIf="i%2==0;else an">
+          <th>{{ group }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(barA[i])"
+            ></ion-icon>
+          </th>
+          <ng-container *ngFor="let group2 of a1[i]">
+            <th>{{ group2['AD_assign_corporate'] }}</th>
+            <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+              {{ group2['AD_main'] }}
+            </th>
+            <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+              {{ group2['AD_assis'] }}
+            </th>
+            <th *ngIf="group2['AD_work_status'] == 1">
+              {{ group2['AD_main'] }}
+            </th>
+            <th *ngIf="group2['AD_work_status'] == 1">
+              {{ group2['AD_assis'] }}
+            </th>
+          </ng-container>
+        </tr>
+        <ng-template #an>
+          <tr id="tr_odd">
+            <th>{{ group }}</th>
+            <th>
+              <ion-icon
+                name="md-radio-button-on"
+                (click)="setting(barA[i])"
+              ></ion-icon>
+            </th>
+            <ng-container *ngFor="let group2 of a1[i]">
+              <th>{{ group2['AD_assign_corporate'] }}</th>
+              <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+                {{ group2['AD_main'] }}
+              </th>
+              <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+                {{ group2['AD_assis'] }}
+              </th>
+              <th *ngIf="group2['AD_work_status'] == 1">
+                {{ group2['AD_main'] }}
+              </th>
+              <th *ngIf="group2['AD_work_status'] == 1">
+                {{ group2['AD_assis'] }}
+              </th>
+            </ng-container>
+          </tr>
+        </ng-template>
+      </ng-container>
+    </tbody>
+  </table>
+  <table *ngIf="table_status == '修繕'">
+    <thead>
+      <tr>
+        <th>階段</th>
+        <th style="min-width: 30px">設定</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>協辦</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let group of barB;let i = index">
+        <tr id="tr_odd1" *ngIf="i%2==0;else an">
+          <th>{{ group }}</th>
+          <th>
+            <ion-icon
+              name="md-radio-button-on"
+              (click)="setting(barB[i])"
+            ></ion-icon>
+          </th>
+          <ng-container *ngFor="let group2 of a1[i]">
+            <th>{{ group2['AD_assign_corporate'] }}</th>
+            <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+              {{ group2['AD_main'] }}
+            </th>
+            <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+              {{ group2['AD_assis'] }}
+            </th>
+            <th *ngIf="group2['AD_work_status'] == 1">
+              {{ group2['AD_main'] }}
+            </th>
+            <th *ngIf="group2['AD_work_status'] == 1">
+              {{ group2['AD_assis'] }}
+            </th>
+          </ng-container>
+        </tr>
+        <ng-template #an>
+          <tr id="tr_odd">
+            <th>{{ group }}</th>
+            <th>
+              <ion-icon
+                name="md-radio-button-on"
+                (click)="setting(barB[i])"
+              ></ion-icon>
+            </th>
+            <ng-container *ngFor="let group2 of a1[i]">
+              <th>{{ group2['AD_assign_corporate'] }}</th>
+              <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+                {{ group2['AD_main'] }}
+              </th>
+              <th *ngIf="group2['AD_work_status'] == 0" style="color: blue">
+                {{ group2['AD_assis'] }}
+              </th>
+              <th *ngIf="group2['AD_work_status'] == 1">
+                {{ group2['AD_main'] }}
+              </th>
+              <th *ngIf="group2['AD_work_status'] == 1">
+                {{ group2['AD_assis'] }}
+              </th>
+            </ng-container>
+          </tr>
+        </ng-template>
+      </ng-container>
+    </tbody>
+  </table>
+</ion-content>

@@ -1,0 +1,87 @@
+<!--
+  Generated template for the UploadP1Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title start>{{ serial_num }}-{{ client_name }}-{{ case_name }}
+      <p id="title">{{ case_type }}＞文件索取</p>
+    </ion-title>
+  </ion-navbar>
+  <ion-item *ngIf="part == 'a'"> 
+    <div style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+      <p>實際用途:</p>
+      <p>類組:</p>
+      <p>*申報期限:</p>
+    </div>
+    <div>
+      <button id="edit" ion-button  [ngStyle]="{'background-color': ch_color2[0],'color': color2[0]}" (click)='action(0)'>下載</button>
+      <button id="edit1" ion-button [ngStyle]="{'background-color': ch_color2[1],'color': color2[1]}" (click)='action(1)'>Mail</button>
+    </div>
+  </ion-item> 
+</ion-header>
+
+<ion-content padding>
+  <div style="display: flex; margin-top: 20px;" *ngIf="part == 'a'">
+    <div style="width: 50%;height: 100%;">
+      <table style="width: 100%;height: 100%;text-align: center;">
+        <thead id="th">
+          <tr>
+          <th></th>
+          <th>序號</th>
+          <th>項目</th>
+          <th>份數</th>
+          <th>業主</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group2 of all_paper;let i = index;">
+            <tr>
+              <td>
+                <ion-checkbox [(ngModel)]="yy[i]">
+                </ion-checkbox>
+              </td>
+              <td>{{ i+1 }}</td>
+              <td>{{ group2[0] }}</td>
+              <td>{{ group2[1] }}</td>
+              <td style="background-color: rgb(232,233,234);">{{ group2[2] }}</td>
+              <td>{{ group2[3] }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div id="right" style="width: 50%;height: 100%;" *ngIf='act==1'>
+      <table id="right">
+        <thead>
+          <tr>
+            <th>收件人<ion-icon ios="ios-people" md="md-people" style="cursor: pointer;" (click)="chooseMail()"></ion-icon></th>
+            <th>{{ name_arr }}</th>
+          </tr>
+          <tr>
+            <th>主旨</th>
+          <th>
+            <input style="width: 70%;border: none;text-align-last:left;color: black;" [(ngModel)]="subject"  placeholder="請輸入..." type="text">
+          </th>
+        </tr>
+          <tr>
+          <th colspan="2">內文</th>
+        </tr>
+        <tr style="height: 10em;">
+          <td colspan="2">
+            <textarea style="width: 100%;height: 10em;resize: none;border: none;text-align-last:left ;color: black;background-color: rgb(232,233,234);padding: 5px;" [(ngModel)]="content" placeholder="請輸入..."></textarea>
+          </td>
+        </tr>
+        <tr style="height: 2em;">
+          <td id="send_td" colspan="2">
+            <button id="send" (click)="send_file_mail()">送出</button>
+          </td>
+        </tr>
+        </thead>
+      </table>
+      <button *ngIf='part=="a"' id="next2" (click)="go_part('b')"><ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon></button>
+    </div>
+  </div>
+</ion-content>

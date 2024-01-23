@@ -1,0 +1,50 @@
+<!-- <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of items" (click)="return(item.number)">
+  <ion-label>{{ item.name }}</ion-label>
+  <ion-icon item-start name="{{item.icon}}"></ion-icon>
+</ion-item> -->
+<div>
+  <div class="up">
+    <ion-icon style="float: left;" name="md-add" (click)="add_sort()"></ion-icon>
+    <ion-icon style="float: right;" name="md-remove" (click)="remove_sort()"></ion-icon>
+  </div>
+  
+  <!-- <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);" no-lines *ngFor="let sort of sort_condition">
+    <ion-label>排序方式</ion-label>
+    <ion-label>
+      <select [(ngModel)]="sort['p1']">
+        <option *ngFor="let group of sort['p1_arr']" value="group">{{ group }}</option>
+      </select>
+    </ion-label>
+    <ion-label>順序</ion-label>
+    <ion-label>
+      <select [(ngModel)]="sort['p2']">
+        <option *ngFor="let group of sort['p2_arr']" value="group">{{ group }}</option>
+      </select>
+    </ion-label>
+  </ion-item> -->
+  <div class="down">
+    <table>
+      <ng-container *ngFor="let sort of sort_condition;let i = index;">
+        <tr>
+          <td>排序方式</td>
+          <td>
+            <select [(ngModel)]="sort['p1']" (change)="arr(i)">
+              <option value=""></option>
+              <option *ngFor="let group of sort['p1_arr']" value="{{group}}">{{ group }}</option>
+            </select>
+          </td>
+          <td>順序</td>
+          <td>
+            <select [(ngModel)]="sort['p2']">
+              <option *ngFor="let group of sort['p2_arr']" value="{{group}}">{{ group }}</option>
+            </select>
+          </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="sort_condition.length>0" style="text-align: center;">
+        <td colspan="2" style="background: none;border:none"><button (click)="return_sort()">確定</button></td>
+        <td colspan="2" style="background: none;border:none"><button (click)="back()">取消</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

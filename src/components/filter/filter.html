@@ -1,0 +1,52 @@
+
+<ng-container *ngIf="part != '';else an;">
+  <ng-container *ngIf="part == '內部'">
+    <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of depart">
+      <ion-label>{{ item.depart }}</ion-label>
+      <ion-checkbox [(ngModel)]="item.check"></ion-checkbox>
+    </ion-item>
+    <div style="display: flex; justify-content: space-between;">
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="return()">確定</button>
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="pop()">取消</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="part == '進度總表'">
+    <ion-searchbar [(ngModel)]="search" placeholder="{{ placeholder }}" spellcheck="true"
+    autocomplete="on" showCancelButton="true" (ionInput)="allInput($event,6)" (ionClear)="allRecover(6)"
+    (ionCancel)="allRecover(6)"></ion-searchbar>
+    <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of depart">
+      <ion-label>{{ item.depart }}</ion-label>
+      <ion-checkbox [(ngModel)]="item.check"></ion-checkbox>
+    </ion-item>
+    <div style="display: flex; justify-content: space-between;">
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="return()">確定</button>
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="pop()">取消</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="part == '進度總表-類型'">
+    <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of depart" (click)="return(item.number)">
+      <ion-label>{{ item.depart }}</ion-label>
+      <ion-checkbox [(ngModel)]="item.check"></ion-checkbox>
+    </ion-item>
+    <div style="display: flex; justify-content: space-between;">
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="return()">確定</button>
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="pop()">取消</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="part == '進度總表-圖表'">
+    <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of depart" (click)="return(item.number)">
+      <ion-label>{{ item.depart }}</ion-label>
+      <ion-checkbox [(ngModel)]="item.check"></ion-checkbox>
+    </ion-item>
+    <div style="display: flex; justify-content: space-between;">
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="return()">確定</button>
+      <button class="button" style="margin: 10px; padding: 5px; font-size: 1em;" (click)="pop()">取消</button>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-template #an>
+  <ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of items" (click)="return(item.number)">
+    <ion-label>{{ item.name }}</ion-label>
+    <ion-icon item-start name="{{item.icon}}"></ion-icon>
+  </ion-item>
+</ng-template>

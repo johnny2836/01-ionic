@@ -1,0 +1,72 @@
+<ion-content style="font-family: '微軟正黑體'; text-align: center">
+  <div id="top_image">
+    <div
+      style="
+        padding-top: 17%;
+        display: flex;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <div style="padding-bottom: 130px">
+        <img
+          src="https://ici-biot.com/ici/ap/ionic_app/CK_platform/assets/imgs/logo.png"
+          alt=""
+          style="max-width: 400px; max-height: 157.43px"
+        />
+        <h1 style="color: black">熙 特 爾 新 能 源</h1>
+      </div>
+      <ion-row
+        justify-content-center
+        style="margin-left: 60px; margin-top: 10px"
+      >
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-item
+            style="
+              height: 45px;
+              margin-left: auto;
+              margin-right: auto;
+              border: white solid 1px;
+              border-radius: 25px;
+              width: 350px;
+            "
+            no-lines
+          >
+            <ion-input
+              name="email"
+              type="email"
+              placeholder="Email"
+              [(ngModel)]="email"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item
+            style="
+              height: 45px;
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 25px;
+              border: white solid 1px;
+              border-radius: 25px;
+              width: 350px;
+            "
+            no-lines
+          >
+            <ion-input
+              name="password"
+              type="password"
+              placeholder="密碼"
+              [(ngModel)]="password"
+              required
+            ></ion-input>
+          </ion-item>
+          <div style="text-align: center">
+            <button type="submit" (click)="login()" expand="block">登入</button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- </ion-grid> -->
+    </div>
+  </div>
+</ion-content>

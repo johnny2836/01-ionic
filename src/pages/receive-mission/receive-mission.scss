@@ -1,0 +1,44 @@
+page-receive-mission {
+    .toolbar-md{
+        padding: 0px;
+      }
+    .toolbar-title-md{
+        color: black;
+        font-size: 2em;
+        font-weight: 400;
+        font-family: '微軟正黑體';
+    }
+    table{
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 1.15em;
+        text-align: center;
+        th{
+            background-color:rgb(68,84,106);
+            color: #FFF;
+            border: solid 1px #FFF;
+        }
+        td{
+            border: solid 1px #FFF;
+            padding: 5px;
+        }
+        tr:nth-child(odd){
+            background-color:rgb(205,207,211);
+            height: 40px;
+        }
+        tr:nth-child(even){
+            background-color:rgb(232,233,234);
+            height: 40px;
+        }
+    }
+    button{
+        border-radius: 20px;
+        span{
+            margin-right: 10px;
+        }
+    }
+    button:hover{
+        background-color: rgb(198, 198, 198);
+    }
+}

@@ -1,0 +1,96 @@
+page-re-upload-pic {
+    #upload{
+        background: none;
+        margin-left: 10px;
+        font-size: 1.8em;
+        color: rgb(255, 255, 255);
+    }
+    #upload:hover{
+        color: rgb(221, 221, 221);
+        cursor: pointer;
+    }
+    #title{
+        font-weight: bold;
+    }
+
+    table{
+        text-align: center;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        thead{
+            color: white;
+            background-color: rgb(68,84,106);
+            height: 50px;
+            font-size: 1.2em;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            th{
+                border: solid 1px white;
+            }
+        }
+        tbody{
+            height: 50px;
+            font-size: 1.1em;
+            background-color:rgb(205,207,211);
+            textarea{
+                width: 80%;
+                height: 5em;
+                padding: 5px;
+            }
+            td{
+                border: solid 1px white;
+            }
+        }
+    }
+    #table2{
+        ion-row{
+            background-color:rgb(205,207,211); 
+        }
+        ion-row:nth-child(odd){
+            ion-col{
+            background-color:rgb(68,84,106);
+            font-size: large;
+            font-weight: bold;
+            border:1px solid #FFF;
+            max-width: 100%;
+            text-align: center;
+            color: #FFF;
+            }
+        }
+        ion-row:nth-child(even){
+            ion-col{
+                background-color: rgb(205,207,211);
+                font-size: large;
+                font-weight: bold;
+                border:1px solid #FFF;
+                max-width: 15%;
+                // height: 6em;
+                // overflow-y: scroll;
+                text-align: center;
+                margin: 5px;
+            ion-textarea{
+                    height: 4em;
+                    margin: 0px;
+                }
+            }
+        }
+    }
+
+    #sendto{
+        font-size: 1em;
+        border-radius: 10px;
+        background-color: cadetblue;
+        box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 2.3em;
+        width: 5em;
+        color: white;
+    }
+    #sendto:hover{
+    background-color: rgb(76, 127, 129);
+    }
+
+
+
+}

@@ -1,0 +1,129 @@
+page-progress-manage {
+    .scroll-content {
+        overflow-x: scroll;
+    }
+    table{
+        width:100%;
+        font-size:1.4vh;
+        @media (min-width: 768px) {
+          font-size:1.6vh;
+          width:100%;
+          margin-left:auto;
+          margin-right:auto;
+          }  
+    }
+    thead th {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: -10px;
+        background:rgb(50,63,79);
+        color: #FFF;
+        min-width: 150px;
+        border: white solid 1px;
+        height: 40px;
+        font-size: 20px;
+        // border-bottom: white solid 4px;
+      }
+      #th_static:first-child{
+        top: -10px;
+        left: 0;
+        z-index: 10;
+      }
+      #th_static:nth-child(2){
+        top: -10px;
+        left: 150px;
+        z-index: 20;
+      }
+      #th_static:nth-child(3){
+        top: -10px;
+        left: 300px;
+        z-index: 20;
+      }
+      #th_static:nth-child(4){
+        top: -10px;
+        left: 450px;
+        z-index: 20;
+      }
+      #td_td{
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        // top: 25px;
+        background:rgb(232,233,234);
+      }
+      #td_static:first-child{
+        position: sticky;
+        left: 150px;
+        z-index: 1;
+        background:rgb(232,233,234);
+      }
+      #td_static:nth-child(2){
+        position: sticky;
+        left: 300px;
+        z-index: 1;
+        background:rgb(232,233,234);
+      }
+      #td_static:nth-child(3){
+        position: sticky;
+        left: 450px;
+        z-index: 1;
+        background:rgb(232,233,234);
+      }
+      #td_td1{
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background:rgb(205,207,211);
+      }
+      #td1_static:first-child{
+        position: sticky;
+        left: 150px;
+        z-index: 1;
+        background:rgb(205,207,211);
+      }
+      #td1_static:nth-child(2){
+        position: sticky;
+        left: 300px;
+        z-index: 1;
+        background:rgb(205,207,211);
+      }
+      #td1_static:nth-child(3){
+        position: sticky;
+        left: 450px;
+        z-index: 1;
+        background:rgb(205,207,211);
+      }
+      td{
+        font-size: 18px;
+        border: solid 1px white;
+      }
+      
+      tr{
+          border: solid 1px white;
+        //   height: 40px;
+      }
+      th{
+          border: white solid 1px;
+          height: 40px;
+      }
+      #tr_odd{
+        background:rgb(232,233,234);
+      }
+      #tr_odd1{
+        background:rgb(205,207,211);
+      }
+      tbody th{
+        min-width: 150px;
+        border: white solid 1px;
+        height: 40px;
+        font-size: 19.5px;
+      }
+      #title{
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      ion-title{
+        margin-top: 10px;
+      }  
+        
+}

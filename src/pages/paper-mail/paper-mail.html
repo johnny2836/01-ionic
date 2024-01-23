@@ -1,0 +1,141 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title start>{{ serial_num }}-{{ client_name }}-{{ case_name }}
+      <p id="title">{{ case_type }}＞設計繪圖＞用印申請</p>
+    </ion-title>
+  </ion-navbar>
+  <ion-item *ngIf="part == 'a'"> 
+    <div style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+      <select [(ngModel)]="where" (change)="load()">
+        <ng-container *ngFor='let city of city_list;let i = index;'>
+          <option *ngIf="city == '高雄市' || city == '臺南市';else an_option" value="{{ city }}">{{ city }}</option>
+          <ng-template #an_option>
+            <option value="{{ city }}" style="color: rgb(196, 196, 196);">{{ city }}</option>
+          </ng-template>
+        </ng-container>
+      </select>
+      <select [(ngModel)]="case_type" (change)="load2()">
+        <option value="室內裝修">室內裝修</option>
+        <option value="用途變更">用途變更</option>
+        <option value="新建工程">新建工程</option>
+      </select>
+      <select *ngIf='case_type=="室內裝修" && where!=""' id="third" [(ngModel)]="list" (change)="people()">
+        <option *ngFor='let option of version_A;let i =index;' value="{{ option }}">{{ option }}</option>
+      </select>
+      <select *ngIf='case_type=="用途變更" && where!=""' id="third" [(ngModel)]="list" (change)="people()">
+        <option *ngFor='let option of version_B;let i =index;' value="{{ option }}">{{ option }}</option>
+      </select>
+      <select *ngIf='case_type=="新建工程" && where!=""' id="third" [(ngModel)]="list" (change)="people()">
+        <option *ngFor='let option of version_C;let i =index;' value="{{ option }}">{{ option }}</option>
+      </select>
+    </div>
+    <!-- 案件類型 -->
+    <!-- <div style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+      <button id="hTitle" [ngStyle]="{'background-color': ch_color[0],'color': color[0]}" ion-button (click)="chType(0)">室內裝修</button>
+      <button id="hTitle" [ngStyle]="{'background-color': ch_color[1],'color': color[1]}" ion-button (click)="chType(1)">用途變更</button>
+      <button id="hTitle" [ngStyle]="{'background-color': ch_color[2],'color': color[2]}" ion-button (click)="chType(2)">檢修案件</button>
+      <button id="hTitle" [ngStyle]="{'background-color': ch_color[3],'color': color[3]}" ion-button (click)="chType(3)">新建工程</button>
+    </div>  -->
+    <!-- <div>
+      <button id="edit" ion-button  [ngStyle]="{'background-color': ch_color2[0],'color': color2[0]}" (click)='action(0)'>下載</button>
+      <button id="edit1" ion-button [ngStyle]="{'background-color': ch_color2[1],'color': color2[1]}" (click)='action(1)'>Mail</button>
+    </div> -->
+  </ion-item>
+</ion-header>
+<ion-content padding>
+  <div style="display: flex;" *ngIf="part == 'a'">
+    <div style="width: 50%;height: 100%;">
+      <div *ngIf="where!='' && case_type!='' && list!='' && (name=='李惠閔' || name=='洪勝華' || name=='葉蕙菁' || name=='洪舒寧' )">
+        <ion-icon class="edit_icon" name="add-circle" (click)="edit_tool1('add')"></ion-icon>
+        <!-- <ion-icon class="edit_icon" name="create" *ngIf="edit_arr == 0" (click)="edit_tool2()"></ion-icon>
+        <ion-icon class="edit_icon" name="checkbox-outline" *ngIf="edit_arr == 1" (click)="edit_tool2()"></ion-icon> -->
+        <ion-icon class="edit_icon" name="trash" (click)="edit_tool3()"></ion-icon>
+      </div>
+      <table style="width: 100%;height: 100%;text-align: center;">
+        <thead id="th">
+          <tr>
+          <th></th>
+          <th>序號</th>
+          <th>項目</th>
+          <th>份數</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group2 of new_list;let i = index;">
+            <tr>
+              <td></td>
+              <td style="display: grid;">
+                <ion-icon class="tool1" name="checkmark-circle" (click)="edit_tool1('save', i)"></ion-icon>
+                <ion-icon class="tool1" name="close-circle" (click)="edit_tool1('minus', i)"></ion-icon>
+              </td>
+              <td><input style="width: 300px;" type="text" [(ngModel)]="group2['item_list']"></td>
+              <td><input style="width: 40px;" type="text" [(ngModel)]="group2['copies']"></td>
+            </tr>
+          </ng-container>
+          <ng-container *ngFor="let group2 of all_paper;let i = index;">
+            <tr>
+              <td>
+                <ion-checkbox [(ngModel)]="yy[i]">
+                </ion-checkbox>
+              </td>
+              <td>{{ i+1 }}</td>
+              <td *ngIf="edit_arr==0">{{ group2['item_list'] }}</td>
+              <td *ngIf="edit_arr==0">{{ group2['copies'] }}</td>
+              <td *ngIf="edit_arr==1"><input style="width: 300px;" type="text" [(ngModel)]="group2['item_list']"></td>
+              <td *ngIf="edit_arr==1"><input style="width: 40px;" type="text" [(ngModel)]="group2['copies']"></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div id="right" style="width: 50%;height: 100%;" *ngIf='act==1'>
+      <table id="right">
+        <thead>
+          <tr>
+            <th>收件人<ion-icon ios="ios-people" md="md-people" style="cursor: pointer;" (click)="chooseMail()"></ion-icon></th>
+            <th>{{ name_arr }}</th>
+          </tr>
+          <tr>
+            <th>主旨</th>
+          <th>
+            <input style="width: 70%;border: none;text-align-last:left;color: black;" [(ngModel)]="subject"  placeholder="請輸入..." type="text">
+          </th>
+        </tr>
+          <tr>
+          <th colspan="2">內文</th>
+        </tr>
+        <tr style="height: 10em;">
+          <td colspan="2">
+            <textarea style="width: 100%;height: 10em;resize: none;border: none;text-align-last:left ;color: black;background-color: rgb(232,233,234);" [(ngModel)]="content" placeholder="請輸入..."></textarea>
+          </td>
+        </tr>
+        <tr style="height: 2em;">
+          <td id="send_td" colspan="2">
+            <button id="send" (click)="sendFileMail()">送出</button>
+          </td>
+        </tr>
+        </thead>
+      </table>
+      <button *ngIf='part=="a"' id="next2" (click)="goPart('b')"><ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon></button>
+    </div>
+  </div>
+  <div *ngIf="part == 'b'">
+    <table style="width: 100%;height: 100%;text-align: center;">
+      <tr style="background-color: #44546a;color: #fff;">
+        <th>備註</th>
+      </tr>
+      <tr>
+        <td>
+          <textarea [(ngModel)]="note" style="resize: none;width: 90%;padding: 5px;" cols="30" rows="10" placeholder="請輸入..."></textarea>
+        </td>
+      </tr>
+      <tr style="border: solid 1px white;background-color: white;">
+        <td style="border: solid 1px white;background-color: white;">
+          <button id="sendto" (click)="save()">送出</button>
+        </td>
+      </tr>
+    </table>
+    <button *ngIf='part=="b"' id="next3" (click)="goPart('a')"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon></button>
+  </div>
+</ion-content>

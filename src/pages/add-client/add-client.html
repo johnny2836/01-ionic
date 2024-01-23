@@ -1,0 +1,342 @@
+<!--
+  Generated template for the AddClientPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button *ngIf="section=='新增' && chv == 0" style="width: 4.5vh;" ion-button icon-only (click)="confirm()">確定</button>
+      <button *ngIf="section=='編輯'" style="width: 4.5vh;" ion-button icon-only (click)="send()">儲存</button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf="section=='新增'">
+    <div *ngIf="chv == 0 ">
+      <div style="display: flex;float: right;">
+        <button id="right_icon" ion-button icon-only (click)="popMore()"><ion-icon name="remove"></ion-icon></button>
+        <button id="right_icon" ion-button icon-only (click)="addMore()"><ion-icon name="add"></ion-icon></button>
+      </div>
+      <ng-container *ngFor="let add of add_per;let i = index;">
+        <table style="margin-bottom: 15px;">
+          <tr>
+            <th colspan="4">新增人員 {{ i+1 }}</th>
+          </tr>
+          <tr>
+            <th>部門</th>
+            <th>姓名</th>
+            <th>職稱</th>
+            <th>證書字號</th>
+          </tr>
+          <tr>
+            <td><select [(ngModel)]="add.depart">
+              <option *ngFor="let op of list1" value="{{ op }}">{{ op }}</option>
+            </select></td>
+            <td colspan="2"><input type="text" [(ngModel)]="add.name" placeholder="姓名"></td>
+            <td><input type="text" [(ngModel)]="add.character" placeholder="職稱"></td>
+            <td><input type="text" [(ngModel)]="add.certificate" placeholder="證書字號"></td>
+          </tr>
+          <tr>
+            <th>電話</th>
+            <th colspan="2">郵件</th>
+            <th>傳真</th>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="add.tele" placeholder="電話"></td>
+            <td colspan="2"><input type="text" style="width: 80%" [(ngModel)]="add.email" placeholder="郵件"></td>
+            <td><input type="text" [(ngModel)]="add.fax" placeholder="傳真"></td>
+          </tr>
+          <tr>
+            <th>平台帳號</th>
+            <th>平台密碼</th>
+            <th>BMS帳號</th>
+            <th>App帳號</th>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="add.account" placeholder="帳號"></td>
+            <td><input type="text" [(ngModel)]="add.password" placeholder="密碼"></td>
+            <td>{{ add.BMS }}</td>
+            <td><input type="text" [(ngModel)]="add.App" placeholder="App帳號"></td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+    <div *ngIf="chv == 1 || chv == 2">
+      <table>
+        <tr>
+          <th>客戶編號</th>
+          <td><input type="text" [(ngModel)]="client_num"></td>
+          <th>客戶類型編號</th>
+          <td><input type="text" [(ngModel)]="client_num_type"></td>
+          <th>客戶名稱</th>
+          <td><input type="text" [(ngModel)]="company"></td>
+        </tr>
+        <tr>
+          <th>統編</th>
+          <td><input type="text" [(ngModel)]="uniform"></td>
+          <th>地址</th>
+          <td><input type="text" [(ngModel)]="address"></td>
+          <th>電話</th>
+          <td><input type="text" [(ngModel)]="phone"></td>
+        </tr>
+        <tr>
+          <th>傳真</th>
+          <td><input type="text" [(ngModel)]="fax"></td>
+          <th>負責人</th>
+          <td><input type="text" [(ngModel)]="main"></td>
+          <th>手機</th>
+          <td><input type="text" [(ngModel)]="mobile"></td>
+        </tr>
+        <tr>
+          <th>信箱</th>
+          <td><input type="text" [(ngModel)]="mail"></td>
+          <th>類組</th>
+          <td></td>
+          <th>實際用途</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>送貨地址</th>
+          <td><input type="checkbox"><p style="display: inline;">同地址</p>
+            <input type="text" [(ngModel)]="shipping_address"></td>
+          <th>申報</th>
+          <td><input type="text" [(ngModel)]="declare"></td>
+          <th>結帳類別</th>
+          <td>
+            <select [(ngModel)]="check_type">
+              <option *ngFor="let group of check_type_arr;" value="group">{{ group }}</option>
+            </select>
+            <!-- <input type="text" [(ngModel)]="check_type"> -->
+          </td>
+        </tr>
+        <tr>
+          <th>帳號</th>
+          <td><input type="text" [(ngModel)]="account"></td>
+          <th>密碼</th>
+          <td><input type="text" [(ngModel)]="password"></td>
+          <th>line id</th>
+          <td><input type="text" [(ngModel)]="line_id"></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th colspan="9">角色分類</th>
+        </tr>
+        <tr>
+          <th>業主</th>
+          <th>客戶</th>
+          <th>建築師</th>
+          <th>設計師</th>
+          <th>電機技師</th>
+          <th>消防公司</th>
+          <th>營造廠</th>
+          <th>水電公司</th>
+          <th>裝修公司</th>
+        </tr>
+        <tr>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'業主')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'客戶')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'建築師')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'設計師')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'電機技師')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'消防公司')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'營造廠')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'水電公司')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxCharacter($event,'裝修公司')"></ion-checkbox></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th colspan="5">案件類型</th>
+        </tr>
+        <tr>
+          <th>室內裝修</th>
+          <th>用途變更</th>
+          <th>檢修案件</th>
+          <th>新建工程</th>
+          <th>修繕案件</th>
+        </tr>
+        <tr>
+          <td><ion-checkbox (ionChange)="checkboxType($event,'室內裝修')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxType($event,'用途變更')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxType($event,'檢修案件')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxType($event,'新建工程')"></ion-checkbox></td>
+          <td><ion-checkbox (ionChange)="checkboxType($event,'修繕案件')"></ion-checkbox></td>
+        </tr>
+        <tr style="border: solid 1px white;background-color: white;">
+          <td colspan="5" style="border: solid 1px white;background-color: white;">
+            <button id="sendto" (click)="confirm()">確定</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="section=='編輯'">
+    <div *ngIf="chv == 0 ">
+      <ng-container *ngFor="let add of ad_edit_show;let i = index;">
+        <table style="margin-bottom: 15px;">
+          <tr>
+            <th colspan="4">編輯人員 {{ i+1 }}</th>
+          </tr>
+          <tr>
+            <th>部門</th>
+            <th>姓名</th>
+            <th>職稱</th>
+            <th>證書字號</th>
+          </tr>
+          <tr>
+            <td><select [(ngModel)]="add.depart">
+              <option *ngFor="let op of list1" value="{{ op }}">{{ op }}</option>
+            </select></td>
+            <td><input type="text" [(ngModel)]="add.name" placeholder="姓名"></td>
+            <td><input type="text" [(ngModel)]="add.character" placeholder="職稱"></td>
+            <td><input type="text" [(ngModel)]="add.certificate" placeholder="證書字號"></td>
+          </tr>
+          <tr>
+            <th>電話</th>
+            <th colspan="2">郵件</th>
+            <th>傳真</th>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="add.tele" placeholder="電話"></td>
+            <td colspan="2"><input type="text" style="width: 80%" [(ngModel)]="add.email" placeholder="郵件"></td>
+            <td><input type="text" [(ngModel)]="add.fax" placeholder="傳真"></td>
+          </tr>
+          <tr>
+            <th>平台帳號</th>
+            <th>平台密碼</th>
+            <th>BMS帳號</th>
+            <th>App帳號</th>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="add.account" placeholder="帳號"></td>
+            <td><input type="text" [(ngModel)]="add.password" placeholder="密碼"></td>
+            <td>{{ add.BMS }}</td>
+            <td><input type="text" [(ngModel)]="add.App" placeholder="App帳號"></td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+    <div *ngIf="chv == 1 || chv == 2">
+      <!-- <select [(ngModel)]="option_company" (change) = load_arr()>
+        <ng-container *ngFor="let option of company; let i = index;">
+          <option value="{{ option }}">{{ option }}</option>
+        </ng-container>
+      </select> -->
+      <ng-container *ngFor="let group of show_data; let i = index;">
+        <table>
+          <tr>
+            <th colspan="6">【{{ i+1 }}】{{ group.company }}</th>
+          </tr>
+          <tr>
+            <th>客戶編號</th>
+            <td>{{ group.client_num }}</td>
+            <!-- <td><input type="text" [(ngModel)]="group.client_num"></td> -->
+            <th>客戶類型編號</th>
+            <td><input type="text" [(ngModel)]="group.client_num_type"></td>
+            <th>客戶名稱</th>
+            <td><input type="text" [(ngModel)]="group.company"></td>
+          </tr>
+          <tr>
+            <th>統編</th>
+            <td><input type="text" [(ngModel)]="group.uniform"></td>
+            <th>地址</th>
+            <td><input type="text" [(ngModel)]="group.address"></td>
+            <th>電話</th>
+            <td><input type="text" [(ngModel)]="group.phone"></td>
+          </tr>
+          <tr>
+            <th>傳真</th>
+            <td><input type="text" [(ngModel)]="group.fax"></td>
+            <th>負責人</th>
+            <td><input type="text" [(ngModel)]="group.main"></td>
+            <th>手機</th>
+            <td><input type="text" [(ngModel)]="group.mobile"></td>
+          </tr>
+          <tr>
+            <th>信箱</th>
+            <td><input type="text" [(ngModel)]="group.group.mail"></td>
+            <th>類組</th>
+            <td></td>
+            <th>實際用途</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>送貨地址</th>
+            <td><input type="checkbox"><p style="display: inline;">同地址</p>
+              <input type="text" [(ngModel)]="group.shipping_address"></td>
+            <th>申報</th>
+            <td><input type="text" [(ngModel)]="group.declare"></td>
+            <th>結帳類別</th>
+            <td>
+              <select [(ngModel)]="group.check_type">
+                <option *ngFor="let option of group.check_type_arr;" value="{{option}}">{{ option }}</option>
+              </select>
+              <!-- <input type="text" [(ngModel)]="group.check_type"> -->
+            </td>
+          </tr>
+          <tr>
+            <th>帳號</th>
+            <td><input type="text" [(ngModel)]="group.account"></td>
+            <th>密碼</th>
+            <td><input type="text" [(ngModel)]="group.password"></td>
+            <th>line id</th>
+            <td><input type="text" [(ngModel)]="group.line_id"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th colspan="9">角色分類</th>
+          </tr>
+          <tr>
+            <th>業主</th>
+            <th>客戶</th>
+            <th>建築師</th>
+            <th>設計師</th>
+            <th>電機技師</th>
+            <th>消防公司</th>
+            <th>營造廠</th>
+            <th>水電公司</th>
+            <th>裝修公司</th>
+          </tr>
+          <tr>
+            <td><input type="checkbox" [(ngModel)]="group.type1"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type2"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type3"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type4"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type5"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type6"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type7"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type8"></td>
+            <td><input type="checkbox" [(ngModel)]="group.type9"></td>
+          </tr>
+        </table>
+        <table style="margin-bottom: 25px;">
+          <tr>
+            <th colspan="5">案件類型</th>
+          </tr>
+          <tr>
+            <th>室內裝修</th>
+            <th>用途變更</th>
+            <th>檢修案件</th>
+            <th>新建工程</th>
+            <th>修繕案件</th>
+          </tr>
+          <tr>
+            <td><input type="checkbox" [(ngModel)]="group.case_type1"></td>
+            <td><input type="checkbox" [(ngModel)]="group.case_type2"></td>
+            <td><input type="checkbox" [(ngModel)]="group.case_type3"></td>
+            <td><input type="checkbox" [(ngModel)]="group.case_type4"></td>
+            <td><input type="checkbox" [(ngModel)]="group.case_type5"></td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+  </ng-container>
+
+</ion-content>

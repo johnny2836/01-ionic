@@ -1,0 +1,1520 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons end>
+      <button id="bms_go" (click)="bmsGo()">
+        <img src="assets/imgs/camera.png" alt="" />
+      </button>
+      <button ion-button icon-only (click)="openAlert()">
+        <ion-icon
+          *ngIf="alert_status;else noAlert"
+          name="notifications"
+          class="spark"
+        >
+        </ion-icon>
+        <ng-template #noAlert>
+          <ion-icon name="notifications"></ion-icon>
+        </ng-template>
+      </button>
+      <button ion-button icon-only (click)="openFirst()">
+        <ion-icon name="md-settings"></ion-icon>
+      </button>
+      <p>使用者：{{ depart }}-{{ user }}</p>
+    </ion-buttons>
+    <ion-title start>
+      <span (click)="bcakMainPage()" style="cursor: pointer">
+        熙 特 爾 數 位 經 營 管 理-{{type}}-{{case_name}}
+      </span>
+    </ion-title>
+  </ion-navbar>
+
+  <ion-item
+    style="
+      border-bottom: rgb(180, 180, 180) solid 1px;
+      background-color: rgb(248, 248, 248);
+      min-height: 135px !important;
+    "
+  >
+    <!-- 第一層 -->
+    <div
+      style="display: flex; width: 100%; margin-left: auto; margin-right: auto"
+    >
+      <button class="type-button" (click)="chType0(0,'儲能案場-配電')">
+        儲能案場-配電
+      </button>
+      <button class="type-button button1">儲能案場-輸電</button>
+      <button class="type-button" (click)="chType0(2,'光電儲能')">
+        光電儲能
+      </button>
+
+      <button class="type-button" (click)="chType0(3,'生產製造')">
+        生產製造
+      </button>
+      <button class="type-button" (click)="chType0(4,'營運管理')">
+        營運管理
+      </button>
+      <button class="type-button" (click)="chType0(5,'產學合作')">
+        產學合作
+      </button>
+    </div>
+    <!-- 第二層 -->
+    <div
+      style="
+        display: flex;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: space-between;
+      "
+    >
+      <div>
+        <button
+          [class.button1]="num===0"
+          class="type-button1"
+          (click)="chType1(0)"
+        >
+          開案階段
+        </button>
+        <button
+          [class.button1]="num===1"
+          class="type-button1"
+          (click)="chType1(1)"
+        >
+          開發許可階段
+        </button>
+        <button
+          [class.button1]="num===2"
+          class="type-button1"
+          (click)="chType1(2)"
+        >
+          規劃設計階段
+        </button>
+        <button
+          [class.button1]="num===3"
+          class="type-button1"
+          (click)="chType1(3)"
+        >
+          施工階段
+        </button>
+        <button
+          [class.button1]="num===4"
+          class="type-button1"
+          (click)="chType1(4)"
+        >
+          驗證上線階段
+        </button>
+      </div>
+      <div>
+        <input
+          type="file"
+          style="visibility: hidden; display: none"
+          accept=".xlsx"
+          (change)="upload('open_case',$event)"
+          #upload1
+        />
+        <button class="type-button1" (click)="upload1.click()">上傳</button>
+      </div>
+    </div>
+  </ion-item>
+</ion-header>
+<ion-content>
+  <!-- 開案階段 -->
+  <div *ngIf="num ===0">
+    <div class="type2-button">
+      <button *ngIf="!edit1" class="type-button1" (click)="edit(0)">
+        編輯
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="add()">新增</button>
+      <button *ngIf="edit1" class="type-button1" (click)="edit(99)">
+        儲存
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="cancelEdit()">
+        取消編輯
+      </button>
+    </div>
+    <table>
+      <thead>
+        <th>項目</th>
+        <th>任務</th>
+        <th>現況</th>
+        <th>開始日期</th>
+        <th>天數</th>
+        <th>完成日期</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>作業</th>
+        <th>剩餘天數</th>
+        <th>前置作業</th>
+        <th>後續作業</th>
+      </thead>
+      <tbody *ngIf="!edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['situation'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['start_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['day'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['department'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['host'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['prefix_work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['continue_work'] }}
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['situation'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['start_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['day'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['department'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['host'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['prefix_work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['continue_work'] }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tbody *ngIf="edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['situation']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="date"
+                [(ngModel)]="show_mission_data[project['id']][0]['start_date']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['day']"
+                (ngModelChange)="calFinshDate([project['id']],0)"
+              />
+            </td>
+
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].department"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let dpOption of department_options">
+                  <option value="{{ dpOption }}">{{ dpOption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].host"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].prefix_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].continue_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['situation']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="date"
+                  [(ngModel)]="show_mission_data[project['id']][j]['start_date']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['day']"
+                  (ngModelChange)="calFinshDate([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].department"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let dpOption of department_options">
+                    <option value="{{ dpOption }}">{{ dpOption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].host"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].prefix_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].continue_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <!-- 開發許可階段 -->
+  <div *ngIf="num ===1">
+    <div class="type2-button">
+      <button *ngIf="!edit1" class="type-button1" (click)="edit(0)">
+        編輯
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="add()">新增</button>
+      <button *ngIf="edit1" class="type-button1" (click)="edit(99)">
+        儲存
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="cancelEdit()">
+        取消編輯
+      </button>
+    </div>
+    <table>
+      <thead>
+        <th>項目</th>
+        <th>任務</th>
+        <th>現況</th>
+        <th>開始日期</th>
+        <th>天數</th>
+        <th>完成日期</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>作業</th>
+        <th>剩餘天數</th>
+        <th>前置作業</th>
+        <th>後續作業</th>
+      </thead>
+      <tbody *ngIf="!edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['situation'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['start_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['day'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['department'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['host'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['prefix_work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['continue_work'] }}
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['situation'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['start_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['day'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['department'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['host'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['prefix_work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['continue_work'] }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tbody *ngIf="edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['situation']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="date"
+                [(ngModel)]="show_mission_data[project['id']][0]['start_date']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['day']"
+                (ngModelChange)="calFinshDate([project['id']],0)"
+              />
+            </td>
+
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].department"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let dpOption of department_options">
+                  <option value="{{ dpOption }}">{{ dpOption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].host"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].prefix_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].continue_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['situation']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="date"
+                  [(ngModel)]="show_mission_data[project['id']][j]['start_date']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['day']"
+                  (ngModelChange)="calFinshDate([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].department"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let dpOption of department_options">
+                    <option value="{{ dpOption }}">{{ dpOption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].host"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].prefix_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].continue_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <!-- 規劃設計階段 -->
+  <div *ngIf="num ===2">
+    <div class="type2-button">
+      <button *ngIf="!edit1" class="type-button1" (click)="edit(0)">
+        編輯
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="add()">新增</button>
+      <button *ngIf="edit1" class="type-button1" (click)="edit(99)">
+        儲存
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="cancelEdit()">
+        取消編輯
+      </button>
+    </div>
+    <table>
+      <thead>
+        <th>項目</th>
+        <th>任務</th>
+        <th>現況</th>
+        <th>開始日期</th>
+        <th>天數</th>
+        <th>完成日期</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>作業</th>
+        <th>剩餘天數</th>
+        <th>前置作業</th>
+        <th>後續作業</th>
+      </thead>
+      <tbody *ngIf="!edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['situation'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['start_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['day'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['department'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['host'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['prefix_work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['continue_work'] }}
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['situation'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['start_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['day'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['department'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['host'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['prefix_work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['continue_work'] }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tbody *ngIf="edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['situation']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="date"
+                [(ngModel)]="show_mission_data[project['id']][0]['start_date']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['day']"
+                (ngModelChange)="calFinshDate([project['id']],0)"
+              />
+            </td>
+
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].department"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let dpOption of department_options">
+                  <option value="{{ dpOption }}">{{ dpOption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].host"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].prefix_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].continue_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['situation']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="date"
+                  [(ngModel)]="show_mission_data[project['id']][j]['start_date']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['day']"
+                  (ngModelChange)="calFinshDate([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].department"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let dpOption of department_options">
+                    <option value="{{ dpOption }}">{{ dpOption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].host"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].prefix_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].continue_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <!-- 施工階段 -->
+  <div *ngIf="num ===3">
+    <div class="type2-button">
+      <button *ngIf="!edit1" class="type-button1" (click)="edit(0)">
+        編輯
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="add()">新增</button>
+      <button *ngIf="edit1" class="type-button1" (click)="edit(99)">
+        儲存
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="cancelEdit()">
+        取消編輯
+      </button>
+    </div>
+    <table>
+      <thead>
+        <th>項目</th>
+        <th>任務</th>
+        <th>現況</th>
+        <th>開始日期</th>
+        <th>天數</th>
+        <th>完成日期</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>作業</th>
+        <th>剩餘天數</th>
+        <th>前置作業</th>
+        <th>後續作業</th>
+      </thead>
+      <tbody *ngIf="!edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['situation'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['start_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['day'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['department'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['host'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['prefix_work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['continue_work'] }}
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['situation'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['start_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['day'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['department'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['host'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['prefix_work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['continue_work'] }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tbody *ngIf="edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['situation']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="date"
+                [(ngModel)]="show_mission_data[project['id']][0]['start_date']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['day']"
+                (ngModelChange)="calFinshDate([project['id']],0)"
+              />
+            </td>
+
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].department"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let dpOption of department_options">
+                  <option value="{{ dpOption }}">{{ dpOption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].host"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].prefix_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].continue_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['situation']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="date"
+                  [(ngModel)]="show_mission_data[project['id']][j]['start_date']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['day']"
+                  (ngModelChange)="calFinshDate([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].department"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let dpOption of department_options">
+                    <option value="{{ dpOption }}">{{ dpOption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].host"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].prefix_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].continue_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <!-- 驗證上線階段 -->
+  <div *ngIf="num ===4">
+    <div class="type2-button">
+      <button *ngIf="!edit1" class="type-button1" (click)="edit(0)">
+        編輯
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="add()">新增</button>
+      <button *ngIf="edit1" class="type-button1" (click)="edit(99)">
+        儲存
+      </button>
+      <button *ngIf="edit1" class="type-button1" (click)="cancelEdit()">
+        取消編輯
+      </button>
+    </div>
+    <table>
+      <thead>
+        <th>項目</th>
+        <th>任務</th>
+        <th>現況</th>
+        <th>開始日期</th>
+        <th>天數</th>
+        <th>完成日期</th>
+        <th>部門</th>
+        <th>主辦</th>
+        <th>作業</th>
+        <th>剩餘天數</th>
+        <th>前置作業</th>
+        <th>後續作業</th>
+      </thead>
+      <tbody *ngIf="!edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['situation'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['start_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['day'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['department'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['host'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['prefix_work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['continue_work'] }}
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['situation'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['start_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['day'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['department'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['host'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['prefix_work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['continue_work'] }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tbody *ngIf="edit1">
+        <ng-container *ngFor="let project of project_data;let i = index;">
+          <tr id="tr_hover">
+            <td
+              id="td_static1"
+              [attr.rowspan]="show_mission_data[project['id']].length"
+            >
+              {{project['project']}}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['mission'] }}
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['situation']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="date"
+                [(ngModel)]="show_mission_data[project['id']][0]['start_date']"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              />
+            </td>
+            <td id="td_static1">
+              <input
+                type="text"
+                [(ngModel)]="show_mission_data[project['id']][0]['day']"
+                (ngModelChange)="calFinshDate([project['id']],0)"
+              />
+            </td>
+
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['finish_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].department"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let dpOption of department_options">
+                  <option value="{{ dpOption }}">{{ dpOption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].host"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['work'] }}
+            </td>
+            <td id="td_static1">
+              {{ show_mission_data[project['id']][0]['left_date'] }}
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].prefix_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+            <td id="td_static1">
+              <select
+                [(ngModel)]="show_mission_data[project.id][0].continue_work"
+                (ngModelChange)="editInputChange([project['id']],0)"
+              >
+                <ng-container *ngFor="let htoption of host_options">
+                  <option value="{{ htoption }}">{{ htoption }}</option>
+                </ng-container>
+              </select>
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let group of show_mission_data[project['id']];let j = index;"
+          >
+            <tr *ngIf="j > 0" id="tr_hover1">
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['mission'] }}
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['situation']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="date"
+                  [(ngModel)]="show_mission_data[project['id']][j]['start_date']"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                <input
+                  type="text"
+                  [(ngModel)]="show_mission_data[project['id']][j]['day']"
+                  (ngModelChange)="calFinshDate([project['id']],j)"
+                />
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['finish_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].department"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let dpOption of department_options">
+                    <option value="{{ dpOption }}">{{ dpOption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].host"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['work'] }}
+              </td>
+              <td id="td_static1">
+                {{ show_mission_data[project['id']][j]['left_date'] }}
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].prefix_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td id="td_static1">
+                <select
+                  [(ngModel)]="show_mission_data[project.id][j].continue_work"
+                  (ngModelChange)="editInputChange([project['id']],j)"
+                >
+                  <ng-container *ngFor="let htoption of host_options">
+                    <option value="{{ htoption }}">{{ htoption }}</option>
+                  </ng-container>
+                </select>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

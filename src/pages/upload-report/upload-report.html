@@ -1,0 +1,38 @@
+<!--
+  Generated template for the UploadReportPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <input style="width: 55px;height: 50px;float: left;" id="attachment" type="file" style="position: absolute;visibility:hidden;display:none;" #file name="attachment" multiple (change)="fileIncoming($event)">
+    <ion-buttons end *ngIf='status==0'>
+    <button style="width: 4.5vh;" ion-button (click)="last()">
+      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+    </button>
+    <button style="width: 4.5vh;" ion-button (click)="next()">
+    <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+  </button>
+    </ion-buttons>
+    <ion-title>設計前報告書上傳 / 下載</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="AA">
+    <button id="next" (click)="download()"><ion-icon ios="ios-cloud-download-outline" md="md-cloud-download"></ion-icon></button>
+    <button id="next" (click)="file.click()"><ion-icon ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon></button>
+  </div>
+  <div style="display:flex;">
+    <iframe [src]="current_url[img_num]" style="width: 100%;height: 50em;" *ngIf='aa[img_num]==0'>
+    </iframe>
+    <div style="width: 100%;height: 50em;text-align: center;" *ngIf='aa[img_num]==1'>
+      <img style="height: 100%;" [src]="current_url[img_num]" alt="pic">
+    </div>
+    <div style="width: 100%;height: 50em;text-align: center;" *ngIf='status==1'>
+      <img style="height: 100%;" src="assets/imgs/file.png" alt="">
+    </div>
+  </div>
+  
+</ion-content>

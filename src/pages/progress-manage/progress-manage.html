@@ -1,0 +1,353 @@
+<!--
+  Generated template for the ProgressManagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title start>{{ case_type }} : {{ client_name }} - {{ case_name }}
+      <p id="title">案件總覽＞進度管理</p>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style="text-align: center;">
+  <ng-container *ngIf="table_status == '其他'">
+    <table>
+      <thead>
+        <tr>
+          <ng-container *ngFor="let th of th_a;let i =index;">
+            <th id="th_static">{{ th }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th id="td_td" rowspan="4">{{ th_b[0] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of tha;let i =index;">
+          <tr>
+            <th id="td_static">{{ td }}</th>
+            <td id="td_static">{{ a8[i] }}</td>
+            <td id="td_static">{{ a9[i] }}</td>
+            <td id="tr_odd">{{ a10[i] }}</td>
+            <td id="tr_odd">{{ a11[i] }}</td>
+            <td id="tr_odd">{{ a13[i] }}</td>
+            <td id="tr_odd">{{ a1[i] }}</td>
+            <td id="tr_odd">{{ a2[i] }}</td>
+            <td id="tr_odd">{{ a3[i] }}</td>
+            <td id="tr_odd">{{ a12[i] }}</td>
+            <td id="tr_odd">{{ a5[i] }}</td>
+            <td id="tr_odd">{{ a6[i] }}</td>
+            <td id="tr_odd">{{ a7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td1" rowspan="3">{{ th_b[1] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thb;let i =index;">
+          <tr>
+            <th id="td1_static">{{ td }}</th>
+            <td id="td1_static">{{ b8[i] }}</td>
+            <td id="td1_static">{{ b9[i] }}</td>
+            <td id="tr_odd1">{{ b10[i] }}</td>
+            <td id="tr_odd1">{{ b11[i] }}</td>
+            <td id="tr_odd1">{{ b13[i] }}</td>
+            <td id="tr_odd1">{{ b1[i] }}</td>
+            <td id="tr_odd1">{{ b2[i] }}</td>
+            <td id="tr_odd1">{{ b3[i] }}</td>
+            <td id="tr_odd1">{{ b12[i] }}</td>
+            <td id="tr_odd1">{{ b5[i] }}</td>
+            <td id="tr_odd1">{{ b6[i] }}</td>
+            <td id="tr_odd1">{{ b7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td" rowspan="6">{{ th_b[2] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thc;let i =index;">
+          <tr>
+            <th id="td_static">{{ td }}</th>
+            <td id="td_static">{{ c8[i] }}</td>
+            <td id="td_static">{{ c9[i] }}</td>
+            <td id="tr_odd">{{ c10[i] }}</td>
+            <td id="tr_odd">{{ c11[i] }}</td>
+            <td id="tr_odd">{{ c13[i] }}</td>
+            <td id="tr_odd">{{ c1[i] }}</td>
+            <td id="tr_odd">{{ c2[i] }}</td>
+            <td id="tr_odd">{{ c3[i] }}</td>
+            <td id="tr_odd">{{ c12[i] }}</td>
+            <td id="tr_odd">{{ c5[i] }}</td>
+            <td id="tr_odd">{{ c6[i] }}</td>
+            <td id="tr_odd">{{ c7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td1" rowspan="8">{{ th_b[3] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thd;let i =index;">
+          <tr>
+            <th id="td1_static">{{ td }}</th>
+            <td id="td1_static">{{ d8[i] }}</td>
+            <td id="td1_static">{{ d9[i] }}</td>
+            <td id="tr_odd1">{{ d10[i] }}</td>
+            <td id="tr_odd1">{{ d11[i] }}</td>
+            <td id="tr_odd1">{{ d13[i] }}</td>
+            <td id="tr_odd1">{{ d1[i] }}</td>
+            <td id="tr_odd1">{{ d2[i] }}</td>
+            <td id="tr_odd1">{{ d3[i] }}</td>
+            <td id="tr_odd1">{{ d12[i] }}</td>
+            <td id="tr_odd1">{{ d5[i] }}</td>
+            <td id="tr_odd1">{{ d6[i] }}</td>
+            <td id="tr_odd1">{{ d7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td" rowspan="5">{{ th_b[4] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of the;let i =index;">
+          <tr>
+            <th id="td_static">{{ td }}</th>
+            <td id="td_static">{{ e8[i] }}</td>
+            <td id="td_static">{{ e9[i] }}</td>
+            <td id="tr_odd">{{ e10[i] }}</td>
+            <td id="tr_odd">{{ e11[i] }}</td>
+            <td id="tr_odd">{{ e13[i] }}</td>
+            <td id="tr_odd">{{ e1[i] }}</td>
+            <td id="tr_odd">{{ e2[i] }}</td>
+            <td id="tr_odd">{{ e3[i] }}</td>
+            <td id="tr_odd">{{ e12[i] }}</td>
+            <td id="tr_odd">{{ e5[i] }}</td>
+            <td id="tr_odd">{{ e6[i] }}</td>
+            <td id="tr_odd">{{ e7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td1" rowspan="5">{{ th_b[5] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thf;let i =index;">
+          <tr>
+            <th id="td1_static">{{ td }}</th>
+            <td id="td1_static">{{ f8[i] }}</td>
+            <td id="td1_static">{{ f9[i] }}</td>
+            <td id="tr_odd1">{{ f10[i] }}</td>
+            <td id="tr_odd1">{{ f11[i] }}</td>
+            <td id="tr_odd1">{{ f13[i] }}</td>
+            <td id="tr_odd1">{{ f1[i] }}</td>
+            <td id="tr_odd1">{{ f2[i] }}</td>
+            <td id="tr_odd1">{{ f3[i] }}</td>
+            <td id="tr_odd1">{{ f12[i] }}</td>
+            <td id="tr_odd1">{{ f5[i] }}</td>
+            <td id="tr_odd1">{{ f6[i] }}</td>
+            <td id="tr_odd1">{{ f7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td" rowspan="3">{{ th_b[6] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thg;let i =index;">
+          <tr>
+            <th id="td_static">{{ td }}</th>
+            <td id="td_static">{{ g8[i] }}</td>
+            <td id="td_static">{{ g9[i] }}</td>
+            <td id="tr_odd">{{ g10[i] }}</td>
+            <td id="tr_odd">{{ g11[i] }}</td>
+            <td id="tr_odd">{{ g13[i] }}</td>
+            <td id="tr_odd">{{ g1[i] }}</td>
+            <td id="tr_odd">{{ g2[i] }}</td>
+            <td id="tr_odd">{{ g3[i] }}</td>
+            <td id="tr_odd">{{ g12[i] }}</td>
+            <td id="tr_odd">{{ g5[i] }}</td>
+            <td id="tr_odd">{{ g6[i] }}</td>
+            <td id="tr_odd">{{ g7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td1" rowspan="4">{{ th_b[7] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thh;let i =index;">
+          <tr>
+            <th id="td1_static">{{ td }}</th>
+            <td id="td1_static">{{ h8[i] }}</td>
+            <td id="td1_static">{{ h9[i] }}</td>
+            <td id="tr_odd1">{{ h10[i] }}</td>
+            <td id="tr_odd1">{{ h11[i] }}</td>
+            <td id="tr_odd1">{{ h13[i] }}</td>
+            <td id="tr_odd1">{{ h1[i] }}</td>
+            <td id="tr_odd1">{{ h2[i] }}</td>
+            <td id="tr_odd1">{{ h3[i] }}</td>
+            <td id="tr_odd1">{{ h12[i] }}</td>
+            <td id="tr_odd1">{{ h5[i] }}</td>
+            <td id="tr_odd1">{{ h6[i] }}</td>
+            <td id="tr_odd1">{{ h7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td" rowspan="6">{{ th_b[8] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thi;let i =index;">
+          <tr>
+            <th id="td_static">{{ td }}</th>
+            <td id="td_static">{{ i8[i] }}</td>
+            <td id="td_static">{{ i9[i] }}</td>
+            <td id="tr_odd">{{ i10[i] }}</td>
+            <td id="tr_odd">{{ i11[i] }}</td>
+            <td id="tr_odd">{{ i13[i] }}</td>
+            <td id="tr_odd">{{ i1[i] }}</td>
+            <td id="tr_odd">{{ i2[i] }}</td>
+            <td id="tr_odd">{{ i3[i] }}</td>
+            <td id="tr_odd">{{ i12[i] }}</td>
+            <td id="tr_odd">{{ i5[i] }}</td>
+            <td id="tr_odd">{{ i6[i] }}</td>
+            <td id="tr_odd">{{ i7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td1" rowspan="6">{{ th_b[9] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thj;let i =index;">
+          <tr>
+            <th id="td1_static">{{ td }}</th>
+            <td id="td1_static">{{ j8[i] }}</td>
+            <td id="td1_static">{{ j9[i] }}</td>
+            <td id="tr_odd1">{{ j10[i] }}</td>
+            <td id="tr_odd1">{{ j11[i] }}</td>
+            <td id="tr_odd1">{{ j13[i] }}</td>
+            <td id="tr_odd1">{{ j1[i] }}</td>
+            <td id="tr_odd1">{{ j2[i] }}</td>
+            <td id="tr_odd1">{{ j3[i] }}</td>
+            <td id="tr_odd1">{{ j12[i] }}</td>
+            <td id="tr_odd1">{{ j5[i] }}</td>
+            <td id="tr_odd1">{{ j6[i] }}</td>
+            <td id="tr_odd1">{{ j7[i] }}</td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <th id="td_td" rowspan="3">{{ th_b[10] }}</th>
+        </tr>
+        <ng-container *ngFor="let td of thk;let i =index;">
+          <tr>
+            <th id="td_static">{{ td }}</th>
+            <td id="td_static">{{ k8[i] }}</td>
+            <td id="td_static">{{ k9[i] }}</td>
+            <td id="tr_odd">{{ k10[i] }}</td>
+            <td id="tr_odd">{{ k11[i] }}</td>
+            <td id="tr_odd">{{ k13[i] }}</td>
+            <td id="tr_odd">{{ k1[i] }}</td>
+            <td id="tr_odd">{{ k2[i] }}</td>
+            <td id="tr_odd">{{ k3[i] }}</td>
+            <td id="tr_odd">{{ k12[i] }}</td>
+            <td id="tr_odd">{{ k5[i] }}</td>
+            <td id="tr_odd">{{ k6[i] }}</td>
+            <td id="tr_odd">{{ k7[i] }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-container *ngIf="table_status == '檢修'">
+    <table>
+      <thead>
+        <tr>
+          <ng-container *ngFor="let th of th_aa;let i =index;">
+            <th id="th_static">{{ th }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let th of thAA;let i =index;">
+          <tr id="tr_odd" *ngIf="i%2==0;else an;">
+            <th>{{ th }}</th>
+            <td>{{ h[i] }}</td>
+            <td>{{ i[i] }}</td>
+            <td>{{ j[i] }}</td>
+            <td>{{ k[i] }}</td>
+            <td>{{ m[i] }}</td>
+            <td>{{ a[i] }}</td>
+            <td>{{ b[i] }}</td>
+            <td>{{ c[i] }}</td>
+            <td>{{ l[i] }}</td>
+            <td>{{ e[i] }}</td>
+            <td>{{ f[i] }}</td>
+            <td>{{ g[i] }}</td>
+          </tr>
+          <ng-template #an>
+            <tr id="tr_odd1">
+              <th>{{ th }}</th>
+              <td>{{ h[i] }}</td>
+              <td>{{ i[i] }}</td>
+              <td>{{ j[i] }}</td>
+              <td>{{ k[i] }}</td>
+              <td>{{ m[i] }}</td>
+              <td>{{ a[i] }}</td>
+              <td>{{ b[i] }}</td>
+              <td>{{ c[i] }}</td>
+              <td>{{ l[i] }}</td>
+              <td>{{ e[i] }}</td>
+              <td>{{ f[i] }}</td>
+              <td>{{ g[i] }}</td>
+            </tr>
+          </ng-template>
+        </ng-container>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-container *ngIf="table_status == '修繕'">
+    <table>
+      <thead>
+        <tr>
+          <ng-container *ngFor="let th of th_aa;let i =index;">
+            <th id="th_static">{{ th }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let th of thBB;let i =index;">
+          <tr id="tr_odd" *ngIf="i%2==0;else an;">
+            <th>{{ th }}</th>
+            <td>{{ h[i] }}</td>
+            <td>{{ i[i] }}</td>
+            <td>{{ j[i] }}</td>
+            <td>{{ k[i] }}</td>
+            <td>{{ m[i] }}</td>
+            <td>{{ a[i] }}</td>
+            <td>{{ b[i] }}</td>
+            <td>{{ c[i] }}</td>
+            <td>{{ l[i] }}</td>
+            <td>{{ e[i] }}</td>
+            <td>{{ f[i] }}</td>
+            <td>{{ g[i] }}</td>
+          </tr>
+          <ng-template #an>
+            <tr id="tr_odd1">
+              <th>{{ th }}</th>
+              <td>{{ h[i] }}</td>
+              <td>{{ i[i] }}</td>
+              <td>{{ j[i] }}</td>
+              <td>{{ k[i] }}</td>
+              <td>{{ m[i] }}</td>
+              <td>{{ a[i] }}</td>
+              <td>{{ b[i] }}</td>
+              <td>{{ c[i] }}</td>
+              <td>{{ l[i] }}</td>
+              <td>{{ e[i] }}</td>
+              <td>{{ f[i] }}</td>
+              <td>{{ g[i] }}</td>
+            </tr>
+          </ng-template>
+        </ng-container>
+      </tbody>
+    </table>
+  </ng-container>
+</ion-content>

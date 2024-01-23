@@ -1,0 +1,104 @@
+<!--
+  Generated template for the ReUploadPicPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>照片上傳</ion-title>
+  </ion-navbar>
+  <!-- <ion-item style="border-bottom:rgb(180, 180, 180) solid 1px;background-color: rgb(248, 248, 248);">
+    <div style="display: flex;width: 100%;margin-left:auto;margin-right:auto;">
+      <p id="title" style="font-size: 1.08em;">客戶</p>
+      <p style="font-size: 1.08em;">【{{ client_name }}】 </p>
+      <p id="title" style="font-size: 1.08em;">　場所</p>
+      <p style="font-size: 1.08em;">【{{ case_name }}】 </p>
+      <p id="title" style="font-size: 1.08em;">　案件類型</p>
+      <p style="font-size: 1.08em;">【{{ case_type }}】 </p>
+      <p id="title" style="font-size: 1.08em;">　拍攝者</p>
+      <p style="font-size: 1.08em;">【{{ user }}】</p>
+      <p id="title" style="font-size: 1.08em;">　主階段</p>
+      <p style="font-size: 1.08em;">【{{ main_section }}】 </p>
+      <p id="title" style="font-size: 1.08em;">　子階段</p>
+      <p style="font-size: 1.08em;">【{{ sec_section }}】 </p>
+    </div>
+  </ion-item> -->
+</ion-header>
+
+<ion-content padding>
+  <table>
+    <thead>
+      <tr>
+        <th>客戶</th>
+        <th>場所</th>
+        <th>案件類型</th>
+        <th>拍攝者</th>
+        <th>主階段</th>
+        <th>子階段</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ client_name }}</td>
+        <td>{{ case_name }}</td>
+        <td>{{ case_type }}</td>
+        <td>{{ user }}</td>
+        <td>{{ main_section }}</td>
+        <td>{{ sec_section }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>{{ title }}</th>
+        <th>名稱</th>
+        <th>結果</th>
+        <th>備註</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color:rgb(232,233,234);">
+        <td>
+          <select [(ngModel)]="num1" (change)="chooseFilter('num2', num1, num2)">
+            <option *ngFor="let a of dis1;" value="{{ a }}">{{ a }}</option>
+          </select>
+        </td>
+        <td *ngIf="sec_section == '會勘缺失' || (case_type == '檢修案件' && main_section == '檢修回報') || (case_type == '修繕案件' && main_section == '需求確認');else an1">
+          <select [(ngModel)]="num2" (change)="chooseFilter('num3', num1, num2)">
+            <option *ngFor="let a of dis2;" value="{{ a }}">{{ a }}</option>
+          </select>
+        </td>
+        <ng-template #an1><td></td></ng-template>
+        <td *ngIf="sec_section == '會勘缺失' || (case_type == '檢修案件' && main_section == '檢修回報') || (case_type == '修繕案件' && main_section == '需求確認');else an2">
+          <select [(ngModel)]="num3">
+            <option *ngFor="let a of dis3;" value="{{ a }}">{{ a }}</option>
+          </select>
+        </td>
+        <ng-template #an2><td></td></ng-template>
+        <td><textarea [(ngModel)]="note" style="resize: none;"></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+  <ion-grid id="table2">
+    <ion-row style="border-top-right-radius: 5px;border-top-left-radius: 5px;">
+      <ion-col style="border-top-right-radius: 5px;border-top-left-radius: 5px;">照片預覽 <ion-icon id="upload" name="cloud-upload" (click)="file.click()"></ion-icon></ion-col>
+    </ion-row>
+    <ion-row style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;background-color:rgb(232,233,234);">
+      <ion-col col-4 *ngFor="let group of img_show_array;let i = index;" style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+        <div style="position: relative;">
+          <ion-icon name="md-close" (click)="deleteImage(i)" style="color: red;position: absolute;right: 7px;font-size: 1em;border:3px solid red;height: 1.25em;width: 1.25em;border-radius: 50%;font-weight: bolder;top: 7px;"></ion-icon>
+          <img style="border:solid rgb(60,60,60) 1px;border-radius:2px;padding: 5px;margin:-2px;" id="img" [src]="img_show_array[i]" (click)="view($event,img_show_array[i] )"/>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <input type="file" style="visibility:hidden;display:none;" #file name="attachment" accept=".jpg,.png" (input)="fileChange($event)" multiple>
+  <div style="text-align: center;">
+    <button id="sendto" (click)="send()">送出</button>
+  </div>
+  
+
+</ion-content>

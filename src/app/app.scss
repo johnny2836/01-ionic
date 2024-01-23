@@ -1,0 +1,75 @@
+// http://ionicframework.com/docs/theming/
+// ::-webkit-scrollbar,
+// *::-webkit-scrollbar {
+//   display: none;
+// }
+.custom-popover {
+    ion-backdrop{
+        opacity: 0.01 !important;
+    }
+  }
+  body {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    }
+
+    .test-modal {
+      .modal-wrapper {
+          width: 700px;
+          left: calc(50% - (700px/2));
+          height: 750px;
+          top: calc(50% - (750px/2));
+      }
+    }
+    .test-modal3 {
+      .modal-wrapper {
+        width: 1300px;
+        left: calc(50% - (1300px/2));
+        height: 800px;
+        top: calc(50% - (800px/2));
+      }
+    }
+    .test-modal4 {
+      .modal-wrapper {
+        width:1800px;
+        left: calc(50% - (1800px/2));
+        height: 900px;
+        top: calc(50% - (900px/2));
+      }
+    }
+    .test-modal5 {
+      .modal-wrapper {
+        width:1000px;
+        left: calc(50% - (1000px/2));
+        height: 800px;
+        top: calc(50% - (800px/2));
+      }
+    }
+    .popover-content {
+      transform: none !important;
+      // top: calc(50% - (800px/2)) !important;
+      // top: 100px !important;
+    }
+
+    .popover-hhh {
+      .popover-content {
+        top: 30px !important;
+        left:  calc(100% - (160px))  !important;
+      }
+    }
+    
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.

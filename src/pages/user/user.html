@@ -1,0 +1,91 @@
+<!--
+  Generated template for the UserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>使用者基本資料</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<table style="height: 100%">
+  <tr>
+    <th>部門</th>
+    <td>{{ user['depart'] }}</td>
+    <th>姓名</th>
+    <td> {{ user['name'] }} {{ user['character'] }}</td>
+  </tr>
+  <tr>
+    <th>帳號</th>
+    <td colspan="3">{{ user['account'] }}</td>
+  </tr>
+  <tr>
+    <th>密碼
+      <ion-icon name="md-eye-off" style="font-size: 1.5em;cursor: pointer;z-index: 5;margin-left: 10px;" *ngIf="!show_password" (click)="changeShow()"></ion-icon>
+      <ion-icon name="md-eye" style="font-size: 1.5em;cursor: pointer;z-index: 5;margin-left: 10px;" *ngIf="show_password" (click)="changeShow()"></ion-icon>
+    </th>
+    <td colspan="3">
+      <div style="display: flex;justify-content: space-between;">
+        <p *ngIf="show_password">{{ user['password'] }}</p>
+        <ion-input name="password" type="password" placeholder="密碼" [(ngModel)]="user['password']" required *ngIf="!show_password"></ion-input>
+        <button *ngIf="!change" (click)="changePassword()">重設密碼</button>
+        <button *ngIf="change" (click)="changePassword()">取消重設</button>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>電話</th>
+    <td colspan="3">{{ user['phone'] }}</td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td colspan="3">{{ user['email'] }}</td>
+  </tr>
+  <tr>
+    <th>傳真</th>
+    <td colspan="3">{{ user['fax'] }}</td>
+  </tr>
+  <tr>
+    <th>BMS帳號</th>
+    <td colspan="3">{{ user['bms_account'] }}</td>
+  </tr>
+  <tr>
+    <th>App帳號</th>
+    <td colspan="3">{{ user['app_account'] }}</td>
+  </tr>
+</table>
+<div></div>
+<table style="margin-top: 10px;" *ngIf="change">
+  <tr>
+    <th colspan="2">重設密碼</th>
+  </tr>
+  <tr>
+    <th>新密碼</th>
+    <td><ion-input name="password" type="password" placeholder="密碼" [(ngModel)]="n_password1" required></ion-input></td>
+  </tr>
+  <tr>
+    <th>密碼確認</th>
+    <td><ion-input name="password" type="password" placeholder="密碼" [(ngModel)]="n_password2" required></ion-input></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div style="display: flex;">
+        <ion-input required placeholder="請輸入驗證碼" [(ngModel)]="vertify"></ion-input>
+        <button ion-button  item-right color="dark" clear style="font-size:1 em" (click)="getVertify()" *ngIf="!count_check">發送驗證碼</button>
+        <button ion-button  item-right color="dark" clear style="font-size:1 em" *ngIf="count_check">重新發送({{ count_second }})</button>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div style="display: flex;justify-content: space-evenly;">
+        <button style="margin-top: 10px;" id="confirm" (click)="confirmChange()">確認</button>
+        <button style="margin-top: 10px;" (click)="changePassword()">取消</button>
+      </div>
+    </td>
+  </tr>
+</table>
+</ion-content>

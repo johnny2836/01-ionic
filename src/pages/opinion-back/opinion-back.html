@@ -1,0 +1,388 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title start
+      >{{ serial_num }}-{{ client_name }}-{{ case_name }}
+      <p id="title">{{ type_case }}＞圖資準備＞意見回饋</p>
+    </ion-title>
+  </ion-navbar>
+  <ion-item
+    style="
+      border-bottom: rgb(180, 180, 180) solid 1px;
+      background-color: rgb(248, 248, 248);
+    "
+  >
+    <div
+      style="display: flex; width: 100%; margin-left: auto; margin-right: auto"
+    >
+      <button
+        id="hTitle"
+        ion-button
+        [ngStyle]="{'background-color': ch_color[0],'color': color[0]}"
+        (click)="chType(0)"
+      >
+        意見回饋列表
+      </button>
+      <button
+        id="hTitle"
+        ion-button
+        [ngStyle]="{'background-color': ch_color[1],'color': color[1]}"
+        (click)="chType(1)"
+      >
+        信件通知
+      </button>
+      <button
+        id="hTitle"
+        ion-button
+        [ngStyle]="{'background-color': ch_color[2],'color': color[2]}"
+        (click)="chType(2)"
+      >
+        作業備註
+      </button>
+    </div>
+  </ion-item>
+</ion-header>
+
+<ion-content padding>
+  <!-- <button id="hTitle_0" (click)="chType()">儲存</button> -->
+  <div id="top" *ngIf="chv == 0">
+    <table>
+      <thead>
+        <tr style="background-color: #44546a; border-bottom: white solid 1.5px">
+          <th></th>
+          <th>類型</th>
+          <th>項目</th>
+          <th>上傳日期</th>
+          <th>上傳者</th>
+          <th>版次</th>
+          <th>預覽</th>
+          <th>調整事項</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          style="text-align: center"
+          *ngFor="let group1 of list; let i =index"
+        >
+          <td>{{ i+1 }}</td>
+          <td>{{ group1.type }}</td>
+          <td>{{ group1.item }}</td>
+          <td>{{ group1.date }}</td>
+          <td>{{ group1.person }}</td>
+          <td>{{ group1.version }}</td>
+          <td>
+            <ion-icon
+              class="view"
+              ios="ios-eye"
+              md="md-eye"
+              (click)="view(group1.type,group1.item)"
+            ></ion-icon>
+          </td>
+          <td>
+            <select
+              *ngIf='group1.item=="原有使用執照影本"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of a; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="面積計算表"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of b; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="位置圖"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of c; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="門窗圖"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of d; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="平面圖"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of e; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="立剖面圖"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of f; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="結構圖"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of g; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+            <select
+              *ngIf='group1.item=="消防安全設備竣工圖說"'
+              name=""
+              id=""
+              [(ngModel)]="group1.opnion"
+            >
+              <option value=""></option>
+              <option
+                *ngFor="let group of h; let j = index"
+                value="{{ group1.type }}-{{ group1.item }}-{{group}}"
+              >
+                {{group}}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <!-- <tr colspan=8 style="border: none;background:none">
+          <td><button id="sendto" (click)="save_opnion()">確定</button></td>
+        </tr> -->
+      </tbody>
+    </table>
+    <div id="change">
+      <h6 (click)="change()">意見回饋歷史紀錄</h6>
+    </div>
+    <table *ngIf="history == 1">
+      <thead>
+        <tr style="background-color: #44546a; border-bottom: white solid 1.5px">
+          <th>類型</th>
+          <th>項目</th>
+          <th>上傳者</th>
+          <th>版次</th>
+          <th>回饋日期</th>
+          <th>意見回饋</th>
+          <th>預覽</th>
+          <th>附加檔案</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let group of opinion_history; let i = index;">
+          <tr style="text-align: center">
+            <td>{{ group.AD_list_type }}</td>
+            <td>{{ group.AD_list_item }}</td>
+            <td>{{ group.AD_uploader }}</td>
+            <td>V{{ group.AD_version }}</td>
+            <td>{{ group.AD_opinion_time }}</td>
+            <td>{{ group.AD_opinion }}</td>
+            <td>
+              <ion-icon
+                class="view"
+                ios="ios-eye"
+                md="md-eye"
+                (click)="viewHistory(group.AD_list_type,group.AD_list_item,url_history[i])"
+              ></ion-icon>
+            </td>
+            <td>
+              <ion-checkbox
+                style="margin-left: 4px"
+                (ionChange)="createCheckbox($event,group.AD_list_type,group.AD_list_item,group.AD_uploader,group.AD_version,group.AD_opinion,url_history[i])"
+                checked="false"
+              ></ion-checkbox>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <button id="hTitle_0" [ngStyle]="{'background-color': ch_color1[1],'color': color1[1]}" (click)="ch_type1(1)">複製</button>
+  <button id="hTitle_0" [ngStyle]="{'background-color': ch_color1[0],'color': color1[0]}" (click)="ch_type1(0)">MAIL</button> -->
+  <div id="button" *ngIf="chv == 1">
+    <table
+      style="width: 100%; height: 150%; text-align: center; margin-top: 80px"
+    >
+      <thead>
+        <tr
+          style="
+            background-color: #44546a;
+            border: rgb(163, 171, 184) solid 1px;
+          "
+        >
+          <th>
+            收件人<ion-icon
+              ios="ios-people"
+              md="md-people"
+              style="cursor: pointer"
+            ></ion-icon>
+          </th>
+          <th>
+            {{ client_name }}-
+            <select name="" id="" [(ngModel)]="opinion_receiver">
+              <option value=""></option>
+              <option *ngFor="let option of receiver" value="{{ option }}">
+                {{ option }}
+              </option>
+            </select>
+          </th>
+        </tr>
+        <tr
+          style="
+            background-color: #44546a;
+            border: rgb(163, 171, 184) solid 1px;
+          "
+        >
+          <th>主旨</th>
+          <th>
+            <input
+              style="
+                width: 70%;
+                border: none;
+                text-align-last: left;
+                color: black;
+              "
+              [(ngModel)]="subject"
+              placeholder="請輸入..."
+              type="text"
+            />
+          </th>
+        </tr>
+        <tr
+          style="
+            background-color: #44546a;
+            border: rgb(163, 171, 184) solid 1px;
+          "
+        >
+          <th colspan="2">
+            內文　
+            <ion-icon
+              class="copy"
+              ios="ios-copy"
+              md="md-copy"
+              (click)="copyContent(textarea_c)"
+            >
+              <span id="custom-tooltip">copied</span>
+            </ion-icon>
+          </th>
+        </tr>
+        <tr style="height: 10em">
+          <td colspan="2">
+            <textarea
+              #textarea_c
+              style="
+                width: 100%;
+                height: 10em;
+                resize: none;
+                border: none;
+                text-align-last: left;
+                color: black;
+                background-color: rgb(232, 233, 234);
+              "
+              [(ngModel)]="content"
+              placeholder="請輸入..."
+            ></textarea>
+          </td>
+        </tr>
+        <tr style="height: 3em">
+          <td colspan="2">
+            <button id="send" (click)="sendFileMail()">送出</button>
+          </td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div *ngIf="chv == 2">
+    <table
+      style="
+        width: 95%;
+        text-align: center;
+        margin-top: 80px;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <thead>
+        <tr
+          style="
+            background-color: #44546a;
+            border: rgb(163, 171, 184) solid 1px;
+          "
+        >
+          <td>階段作業　備註</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="height: 10em">
+          <td>
+            <textarea
+              style="
+                width: 100%;
+                height: 20em;
+                resize: none;
+                border: none;
+                text-align-last: left;
+                color: black;
+                background-color: rgb(232, 233, 234);
+              "
+              [(ngModel)]="section_note"
+              placeholder="請輸入..."
+            ></textarea>
+          </td>
+        </tr>
+        <tr style="border: solid 1px white; background-color: white">
+          <td style="border: solid 1px white">
+            <button id="sendto" (click)="saveSectionNote()">確定</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

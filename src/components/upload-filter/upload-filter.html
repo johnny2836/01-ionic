@@ -1,0 +1,4 @@
+<ion-item style="border-bottom: solid 1px rgb(177, 177, 177);height: 35px;" no-lines *ngFor="let item of items" (click)="return(item.number)">
+  <ion-label>{{ item.name }}</ion-label>
+  <ion-icon item-start name="{{item.icon}}"></ion-icon>
+</ion-item>

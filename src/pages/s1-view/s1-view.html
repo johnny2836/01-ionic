@@ -1,0 +1,36 @@
+<!--
+  Generated template for the S1ViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end *ngIf='status==0'>
+      <button style="width: 4.5vh;" ion-button (click)="last()">
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </button>
+      <button style="width: 4.5vh;" ion-button (click)="next()">
+      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>預覽</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<div style="display:flex;">
+  <iframe [src]="current_url[img_num]" style="width: 100%;height: 50em;" *ngIf='aa[img_num]==0'>
+  </iframe>
+  <div style="width: 100%;height: 50em;text-align: center;" *ngIf='aa[img_num]==1'>
+    <img style="height: 100%;" [src]="current_url[img_num]" alt="pic">
+  </div>
+  <div style="width: 100%;height: 50em;text-align: center;" *ngIf='status==1'>
+    <img style="height: 100%;" src="assets/imgs/file.png" alt="">
+  </div>
+</div>
+<!-- <div class="last_next">
+  <button id="last_next"  (click)="last()">上一筆</button>
+  <button id="last_next"  (click)="next()">下一筆</button>
+</div> -->
+</ion-content>

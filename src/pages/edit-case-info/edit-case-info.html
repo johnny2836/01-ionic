@@ -1,0 +1,125 @@
+<!--
+  Generated template for the EditCaseInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button (click)="saveEdit()">儲存</button>
+    </ion-buttons>
+    <ion-title>案件編輯</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <table *ngIf="case_type=='-1'">
+    <thead>
+      <tr style="background-color: rgb(68, 84, 106); height: 40px">
+        <th *ngFor="let group of th_list_a;let i =index">{{ group }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group1 of data;let i =index;">
+        <td>{{ group1.AD_client_name }}</td>
+        <!-- <input style="min-width: 50%;" type="text" placeholder="關鍵字搜尋" [(ngModel)]="data[i].client_name" list="com_name" required> 
+        <datalist id="com_name">
+          <option *ngFor="let group2 of data6;let i = index;" value="{{ group2 }}" ></option>
+        </datalist> -->
+        <!-- <td><input [(ngModel)]="data[i].case_name" type="text"></td> -->
+        <td>{{ group1.AD_case_name }}</td>
+        <td *ngIf="auth==1">
+          <input type="text" [(ngModel)]="group1.AD_case_address" />
+        </td>
+        <td *ngIf="auth==0">{{ group1.AD_case_address }}</td>
+        <td>{{ group1.AD_type }}</td>
+        <td *ngIf="group1.AD_type == '檢修案件';else an1">
+          <select [(ngModel)]="group1.AD_group" (change)="loadActual(i)">
+            <option *ngFor="let option of group_arr" value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+        </td>
+        <ng-template #an1>
+          <td></td>
+        </ng-template>
+        <td *ngIf="group1.AD_type == '檢修案件';else an2">
+          <select [(ngModel)]="group1.AD_actual_use">
+            <option *ngFor="let option of actual_arr[i]" value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+        </td>
+        <ng-template #an2>
+          <td></td>
+        </ng-template>
+        <td><input [(ngModel)]="group1.AD_uniform" type="text" /></td>
+        <td><input [(ngModel)]="group1.AD_address" type="text" /></td>
+        <td><input [(ngModel)]="group1.AD_main" type="text" /></td>
+        <td><input [(ngModel)]="group1.AD_telephone" type="text" /></td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="case_type!='-1'">
+    <thead>
+      <tr style="background-color: rgb(68, 84, 106); height: 40px">
+        <th *ngFor="let group of th_list;let i =index">{{ group }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group1 of data;let i =index;">
+        <td>{{ group1.AD_client_name }}</td>
+        <!-- <input style="min-width: 50%;" type="text" placeholder="關鍵字搜尋" [(ngModel)]="data[i].client_name" list="com_name" required> 
+      <datalist id="com_name">
+        <option *ngFor="let group2 of data6;let i = index;" value="{{ group2 }}" ></option>
+      </datalist> -->
+        <!-- <td><input [(ngModel)]="group1.case_name" type="text"></td> -->
+        <td>{{ group1.AD_case_name }}</td>
+        <td *ngIf="auth==1">
+          <input type="text" [(ngModel)]="group1.AD_case_address" />
+        </td>
+        <td *ngIf="auth==0">{{ group1.AD_case_address }}</td>
+        <td>{{ group1.AD_type }}</td>
+        <td *ngIf="group1.AD_type == '檢修案件';else an1">
+          <select [(ngModel)]="group1.AD_group">
+            <option *ngFor="let option of group_arr" value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+        </td>
+        <ng-template #an1>
+          <td></td>
+        </ng-template>
+        <td *ngIf="group1.AD_type == '檢修案件';else an2">
+          <select [(ngModel)]="group1.AD_actual_use">
+            <option *ngFor="let option of actual_arr[i]" value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
+        </td>
+        <ng-template #an2>
+          <td></td>
+        </ng-template>
+        <td><input [(ngModel)]="group1.AD_notice" type="text" /></td>
+        <td *ngIf="auth==1">
+          <input
+            style="min-width: 50%"
+            type="text"
+            placeholder="關鍵字搜尋"
+            [(ngModel)]="group1.AD_money_com"
+            list="com_name"
+            required
+          />
+          <datalist id="com_name">
+            <option
+              *ngFor="let group2 of data6;let i = index;"
+              value="{{ group2 }}"
+            ></option>
+          </datalist>
+        </td>
+        <td *ngIf="auth==0">{{ group1.AD_money_com }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

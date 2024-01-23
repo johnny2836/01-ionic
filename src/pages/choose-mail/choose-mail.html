@@ -1,0 +1,92 @@
+<!--
+  Generated template for the ChooseMailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button style="width: 4.5vh" ion-button (click)="saveAddress()">
+        <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>信箱</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <p>公司名稱：</p> -->
+  <select [(ngModel)]="company_ch" (change)="loadCompany()">
+    <option *ngFor="let option1 of data4;let i = index;" value="{{ option1 }}">
+      {{option1}}
+    </option>
+    <option value="瑞恩消防">瑞恩消防</option>
+  </select>
+  <input
+    *ngIf="company_ch!='瑞恩消防'"
+    style="min-width: 15%"
+    type="text"
+    placeholder="關鍵字搜尋"
+    [(ngModel)]="get_character"
+    list="com_name1"
+    required
+    (change)="selectProvidCom1($event)"
+  />
+  <datalist id="com_name1">
+    <option
+      *ngFor="let group2 of data6;let i = index;"
+      value="{{ group2 }}"
+    ></option>
+  </datalist>
+  <table>
+    <thead>
+      <tr *ngIf="company_ch!='瑞恩消防';else an1">
+        <ng-container *ngFor="let th of th_a">
+          <th>{{ th }}</th>
+        </ng-container>
+      </tr>
+      <ng-template #an1>
+        <tr *ngIf="company_ch=='瑞恩消防';else an2">
+          <ng-container *ngFor="let th of th_b">
+            <th>{{ th }}</th>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template #an2></ng-template>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let group of receive_per;let i = index;">
+        <tr *ngIf="company_ch!='瑞恩消防'">
+          <td>
+            <ion-checkbox
+              style="margin-left: 4px"
+              (ionChange)="checkboxGet($event,group['AD_client_name'],group['AD_main'],group['AD_mail'])"
+            >
+            </ion-checkbox>
+          </td>
+          <td>{{ group['AD_client_name'] }}</td>
+          <td>{{ group['AD_main'] }}</td>
+          <td>{{ group['AD_telephone'] }}</td>
+          <td>{{ group['AD_mail'] }}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngFor="let group of receive_per;let i = index;">
+        <tr *ngIf="company_ch=='瑞恩消防'">
+          <td>
+            <ion-checkbox
+              style="margin-left: 4px"
+              (ionChange)="checkboxGet($event,group[0],group[1],group[4])"
+            >
+            </ion-checkbox>
+          </td>
+          <td>{{ group[0] }}</td>
+          <td>{{ group[1] }}</td>
+          <td>{{ group[2] }}</td>
+          <td>{{ group[3] }}</td>
+          <td>{{ group[4] }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</ion-content>

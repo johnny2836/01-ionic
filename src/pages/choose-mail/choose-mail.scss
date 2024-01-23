@@ -1,0 +1,74 @@
+page-choose-mail {
+    ion-title{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    p{
+        font-size: 16px;
+      }
+      select{
+        font-size:1.2em;
+        width: 150px;
+        height: 30px;
+        margin-top: 12px;
+        margin-right: 15px;
+        border-radius:2px;
+        margin-left: 1px;
+      //   background-color: rgb(205,207,211);
+        border: 1.5px solid rgb(205,207,211);
+    }
+    .text-input::-moz-placeholder {
+        color: rgb(70, 70, 70);
+      }
+      .text-input:-ms-input-placeholder {
+        color: rgb(70, 70, 70);
+      }
+      .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color: rgb(70, 70, 70);
+      }
+      input{
+        margin-top: 10px;
+        height: 30px;
+        margin-left: -10px;
+      }
+      ion-content{
+          text-align: center;
+      }
+      table{
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+          height: auto;
+          margin-top: 20px;
+        //   height: 50%;
+      }
+      th{
+          background: black;
+          color: white;
+          border: 1px solid white;
+        //   min-height: 50%;
+          font-size: 1.2em;
+      }
+      td{
+        //   background: rgb(216, 216, 216);
+          border: solid 1px white;
+      }
+      tbody tr{
+          height: 40px;
+          font-size: 1.08em;
+      }
+      thead tr{
+          position: sticky;
+          top: -5px;
+          z-index: 100;
+      }
+      tbody tr:nth-child(odd){
+        background-color:rgb(231, 231, 231);
+      }
+      tbody tr:nth-child(even){
+        background-color:rgb(218, 218, 218);
+      }
+      
+}

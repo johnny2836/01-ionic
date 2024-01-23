@@ -1,0 +1,558 @@
+<!--
+  Generated template for the BmsPicViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button id="bms_go" (click)="bmsGo()">
+        <img src="assets/imgs/camera.png" alt="" />
+      </button>
+      <button
+        style="margin-right: 10px"
+        ion-button
+        icon-only
+        (click)="openFirst()"
+      >
+        <ion-icon name="md-settings"></ion-icon>
+      </button>
+      <p>使用者：{{ depart }}-{{ user }}</p>
+    </ion-buttons>
+    <ion-title start>照片預覽</ion-title>
+  </ion-navbar>
+  <ion-item
+    style="
+      border-bottom: rgb(180, 180, 180) solid 1px;
+      background-color: rgb(248, 248, 248);
+      margin-top: -20px;
+    "
+  >
+    <div
+      style="display: flex; width: 100%; margin-left: auto; margin-right: auto"
+    >
+      <span *ngIf="chv == 0" (click)="chType(1)">切換相簿</span>
+      <span *ngIf="chv == 1" (click)="chType(0)">切換表格</span>
+    </div>
+    <div
+      style="
+        display: flex;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+      "
+    >
+      <!-- <div style="display: flex;"> -->
+      <p style="font-size: 1.08em">區間</p>
+      <input
+        [(ngModel)]="input_date_start"
+        type="date"
+        (change)="choose_date()"
+      />
+      <p>～</p>
+      <input
+        [(ngModel)]="input_date_end"
+        type="date"
+        (change)="choose_date()"
+      />
+      <p style="font-size: 1.08em">　輸出格式</p>
+      <select [(ngModel)]="output">
+        <option value=""></option>
+        <option
+          *ngFor="let option of dis['docx'];"
+          value="{{ option[0] }}-{{ option[1] }}"
+        >
+          {{ option[0] }}
+        </option>
+      </select>
+      <button id="ontput" (click)="output_file()">輸出</button>
+      <input
+        style="margin-left: 30px"
+        type="checkbox"
+        [(ngModel)]="all_true"
+        (change)="GetAll()"
+      />
+      <p style="font-size: 1.08em; margin: 10px">全選照片</p>
+      <button id="icon" (click)="downloadPicZip()">
+        <ion-icon ios="ios-download" md="md-download"></ion-icon>
+      </button>
+      <button id="icon" (click)="deletePic('web')">
+        <ion-icon ios="ios-trash" md="md-trash" *ngIf="chv == 0"></ion-icon>
+      </button>
+      <button
+        id="icon"
+        *ngIf="!show_box && sort_condition.length==0"
+        (click)="sortBox($event)"
+      >
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/imgs/sort_icon.png"
+          alt=""
+        />
+      </button>
+      <button
+        id="icon"
+        style="background-color: #daeef3; border-radius: 5px"
+        *ngIf="!show_box && sort_condition.length>0"
+        (click)="sortBox($event)"
+      >
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/imgs/sort_icon.png"
+          alt=""
+        />
+      </button>
+      <!-- </div> -->
+
+      <!-- <div class="sort">
+        <img style="width: 35px;" src="assets/imgs/sort_icon.png" alt="" *ngIf="!show_box" (click)="sortBox($event)">
+        <button *ngIf="sort[0] == 0" (click)="sortStatus($event,0)">日期</button>
+        <button *ngIf="sort[0] == 1 || sort[0] == 2"  style="background-color: #444c63;color: #FFF;" (click)="sortStatus($event,0)">日期</button>
+        <button *ngIf="sort[1] == 0" (click)="sortStatus($event,1)">時間</button>
+        <button *ngIf="sort[1] == 1 || sort[1] == 2"  style="background-color: #444c63;color: #FFF;" (click)="sortStatus($event,1)">時間</button>
+      </div> -->
+    </div>
+    <!-- <div *ngIf="show_box" class="show_box">
+      <ion-icon style="color: #b6dde7;font-weight: bold;margin-top: 15px;" name="md-add" (click)="addSort()"></ion-icon>
+      <table>
+        <ng-container *ngFor="let sort of sort_condition;let i = index;">
+          <tr>
+            <td>排序方式</td>
+            <td>
+              <select [(ngModel)]="sort['p1']">
+                <option *ngFor="let group of sort['p1_arr']" value="group">{{ group }}</option>
+              </select>
+            </td>
+            <td>順序</td>
+            <td>
+              <select [(ngModel)]="sort['p2']">
+                <option *ngFor="let group of sort['p2_arr']" value="group">{{ group }}</option>
+              </select>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div> -->
+    <div
+      style="
+        display: flex;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+      "
+    >
+      <p style="font-size: 1.08em">客戶</p>
+      <select [(ngModel)]="input_client_name" (change)="choose_filter('A1')">
+        <option *ngFor="let option of dis['A1'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <p style="font-size: 1.08em">　場所</p>
+      <select [(ngModel)]="input_case_name" (change)="choose_filter('A2')">
+        <option *ngFor="let option of dis['A2'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <p style="font-size: 1.08em">　案件類型</p>
+      <select [(ngModel)]="input_case_type" (change)="choose_filter('A3')">
+        <option *ngFor="let option of dis['A3'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <p style="font-size: 1.08em">　拍攝者</p>
+      <select [(ngModel)]="input_AD_account" (change)="choose_filter('A4')">
+        <option *ngFor="let option of dis['A4'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <p style="font-size: 1.08em">　主階段</p>
+      <select [(ngModel)]="input_main_section" (change)="choose_filter('A5')">
+        <option *ngFor="let option of dis['A5'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <p style="font-size: 1.08em">　子階段</p>
+      <select [(ngModel)]="input_sec_section" (change)="choose_filter('A6')">
+        <option *ngFor="let option of dis['A6'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <p style="font-size: 1.08em">　項目</p>
+      <select [(ngModel)]="input_project" (change)="choose_filter('A7')">
+        <option *ngFor="let option of dis['A7'];" value="{{ option }}">
+          {{ option }}
+        </option>
+      </select>
+      <button
+        *ngIf="input_date_start != ''
+      || input_date_end != ''
+      || input_client_name != ''
+      || input_case_name != ''
+      || input_serial_num != ''
+      || input_case_type != '' 
+      || input_AD_account != '' 
+      || input_main_section != '' 
+      || input_sec_section != ''
+      || input_project != ''"
+        id="cancel"
+        (click)="cancel_filter()"
+      >
+        取消
+      </button>
+      <ion-icon
+        *ngIf="(input_client_name != ''
+      && input_case_name != ''
+      && input_case_type != ''
+      && input_main_section != '' 
+      && input_sec_section != '') 
+      || (input_client_name != ''
+      && input_case_name != ''
+      && (input_case_type == '檢修案件' || input_case_type == '修繕案件')
+      && input_main_section != '');else anGray;"
+        id="upload"
+        name="cloud-upload"
+        (click)="reUpload()"
+      ></ion-icon>
+      <ng-template #anGray>
+        <ion-icon
+          style="color: gray"
+          id="upload"
+          name="cloud-upload"
+          (click)="reUpload('None')"
+        ></ion-icon>
+      </ng-template>
+    </div>
+  </ion-item>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf="chv == 0">
+    <table id="chv0">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" [(ngModel)]="all_true" (change)="GetAll()" />
+          </th>
+          <th>客戶</th>
+          <th>場所</th>
+          <th>案件類型</th>
+          <th>日期</th>
+          <th>時間</th>
+          <th>拍攝者</th>
+          <th>主階段</th>
+          <th>子階段</th>
+          <th>項目</th>
+          <th>備註</th>
+          <th>照片</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let group of all_tab;let i = index">
+          <tr>
+            <td>
+              <input
+                type="checkbox"
+                [(ngModel)]="group.checkbox"
+                (change)="checkboxGet(i)"
+              />
+            </td>
+            <td>{{ group.client_name }}</td>
+            <td>{{ group.case_name }}</td>
+            <td>{{ group.case_type }}</td>
+            <td>{{ group.date }}</td>
+            <td>{{ group.time }}</td>
+            <td>{{ group.account }}</td>
+            <td>{{ group.main_section }}</td>
+            <td>{{ group.sec_section }}</td>
+            <td>{{ group.project }}</td>
+            <td>{{ group.note }}</td>
+            <td (click)="view($event,group.pic_url)">
+              <ion-icon
+                ios="ios-image"
+                md="md-image"
+                style="cursor: pointer"
+              ></ion-icon>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <div
+    *ngIf="chv == 1"
+    style="
+      width: 100%;
+      display: flex;
+      margin: auto;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+    "
+  >
+    <ng-container *ngFor="let group of all_tab;let i = index">
+      <div id="frame1" style="margin-top: 3em">
+        <ion-grid style="width: auto">
+          <ion-row
+            style="border: 1px solid #fff; height: 27em; border-radius: 4px"
+          >
+            <ion-col class="col">
+              <div style="position: relative; border-radius: 3px">
+                <div
+                  style="
+                    display: flex;
+                    float: right;
+                    margin-top: -25px;
+                    margin-bottom: 7px;
+                  "
+                >
+                  <input
+                    style="
+                      font-weight: bolder;
+                      font-size: 30px;
+                      position: absolute;
+                      top: -20px;
+                      left: -10px;
+                      cursor: pointer;
+                    "
+                    type="checkbox"
+                    [(ngModel)]="group.checkbox"
+                    (change)="checkboxGet(i)"
+                  />
+                  <ion-icon
+                    *ngIf="group['edit_auth'] == 1 && !edit_row[i] && group.edit_auth"
+                    name="create"
+                    style="font-size: 2em; margin-right: 10px; cursor: pointer"
+                    (click)="editPic(group.pic_url, group.AD_serial_number,i,group.main_section,group.sec_section,group.project,group.project_2,group.project_3,group.note, group.case_name)"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="group['edit_auth'] == 1 && edit_row[i] && group.edit_auth"
+                    name="checkmark-circle-outline"
+                    style="font-size: 2em; margin-right: 10px; cursor: pointer"
+                    (click)="editPic(group.pic_url, group.AD_serial_number,i,group.main_section,group.sec_section,group.project,group.project_2,group.project_3,group.note, group.case_name)"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="group['edit_auth'] == 1 && group.edit_auth"
+                    ios="ios-trash"
+                    md="md-trash"
+                    style="font-size: 2em; cursor: pointer"
+                    (click)="deletePic('work_mobile',group.pic_url, group.AD_serial_number, group.case_type, group.sec_section, group.main_section)"
+                  ></ion-icon>
+                </div>
+                <img
+                  (click)="view($event,group['pic_url'])"
+                  style="
+                    border: solid rgb(60, 60, 60) 1px;
+                    border-radius: 2px;
+                    padding: 5px;
+                  "
+                  class="img"
+                  src="{{ group['pic_url'] }}"
+                />
+              </div>
+            </ion-col>
+            <ion-col>
+              <div style="display: flex">
+                <table
+                  id="chv1"
+                  *ngIf="(group.main_section=='現場會勘' && group.sec_section=='會勘缺失') || (group.main_section=='檢修回報' && group.sec_section=='') || (group.main_section=='需求確認' && group.sec_section=='') ;else an"
+                >
+                  <tr style="background-color: rgb(205, 207, 211)">
+                    <th style="min-width: 4em">類型</th>
+                    <th>{{ group.case_type }}</th>
+                  </tr>
+                  <tr style="background-color: rgb(205, 207, 211)">
+                    <th style="min-width: 4em">客戶</th>
+                    <th>{{ group.client_name }}</th>
+                  </tr>
+                  <tr style="background-color: rgb(205, 207, 211)">
+                    <th style="min-width: 4em">場所</th>
+                    <th>{{ group.case_name }}</th>
+                  </tr>
+
+                  <tr style="background-color: #f0f8ff">
+                    <th style="min-width: 4em">階段</th>
+                    <th>{{ group.main_section }}</th>
+                    <!-- <th *ngIf="!edit_row[i]">{{ group.main_section }}</th>
+                    <th *ngIf="edit_row[i]">
+                      <select [(ngModel)]="group.main_section" (change)="readSelectB(group.main_section,group.sec_section,i,group.AD_serial_number,group.project,group.project_2)">
+                        <option *ngFor="let option of list_a[i]" value="{{ option }}">{{ option }}</option>
+                      </select>
+                    </th> -->
+                  </tr>
+                  <tr style="background-color: #f0f8ff">
+                    <th style="min-width: 4em">任務</th>
+                    <th>{{ group.sec_section }}</th>
+                    <!-- <th *ngIf="!edit_row[i]">{{ group.sec_section }}</th>
+                    <th *ngIf="edit_row[i]">
+                      <select [(ngModel)]="group.sec_section" (change)="readSelectC(group.main_section,group.sec_section,i,group.AD_serial_number,group.project,group.project_2)">
+                        <option *ngFor="let option of list_b[i]" value="{{ option }}">{{ option }}</option>
+                      </select>
+                    </th> -->
+                  </tr>
+                  <tr style="background-color: #f0f8ff">
+                    <th style="min-width: 4em">設備</th>
+                    <th *ngIf="!edit_row[i]">{{ group.project }}</th>
+                    <th *ngIf="edit_row[i]">
+                      <select [(ngModel)]="group.project">
+                        <option
+                          *ngFor="let option of list_c[i]"
+                          value="{{ option }}"
+                        >
+                          {{ option }}
+                        </option>
+                      </select>
+                    </th>
+                  </tr>
+                  <tr style="background-color: #f0f8ff">
+                    <th style="min-width: 4em">名稱</th>
+                    <th *ngIf="!edit_row[i]">{{ group.project_2 }}</th>
+                    <th *ngIf="edit_row[i]">
+                      <select
+                        [(ngModel)]="group.project_2"
+                        (change)="readSelectE(group.project,i,group.project_2)"
+                      >
+                        <option
+                          *ngFor="let option of list_d[i]"
+                          value="{{ option }}"
+                        >
+                          {{ option }}
+                        </option>
+                      </select>
+                    </th>
+                  </tr>
+                  <tr style="background-color: #f0f8ff">
+                    <th style="min-width: 4em">結果</th>
+                    <th *ngIf="!edit_row[i]">{{ group.project_3 }}</th>
+                    <th *ngIf="edit_row[i]">
+                      <select [(ngModel)]="group.project_3">
+                        <option
+                          *ngFor="let option of list_e[i]"
+                          value="{{ option }}"
+                        >
+                          {{ option }}
+                        </option>
+                      </select>
+                    </th>
+                  </tr>
+                  <tr style="background-color: #f0f8ff">
+                    <th style="min-width: 4em">備註</th>
+                    <th *ngIf="!edit_row[i]">{{ group.note }}</th>
+                    <th *ngIf="edit_row[i]">
+                      <textarea
+                        style="resize: none"
+                        [(ngModel)]="group.note"
+                      ></textarea>
+                    </th>
+                  </tr>
+
+                  <tr style="background-color: #fce5cd">
+                    <th style="min-width: 4em">拍攝者</th>
+                    <th>{{ group.account }}</th>
+                  </tr>
+                  <tr style="background-color: #fce5cd">
+                    <th style="min-width: 4em">日期</th>
+                    <th>{{ group.date }}</th>
+                  </tr>
+                  <tr style="background-color: #fce5cd">
+                    <th style="min-width: 4em">時間</th>
+                    <th>{{ group.time }}</th>
+                  </tr>
+                </table>
+                <ng-template #an>
+                  <table id="chv1">
+                    <tr style="background-color: rgb(205, 207, 211)">
+                      <th style="min-width: 4em">類型</th>
+                      <th>{{ group.case_type }}</th>
+                    </tr>
+                    <tr style="background-color: rgb(205, 207, 211)">
+                      <th style="min-width: 4em">客戶</th>
+                      <th>{{ group.client_name }}</th>
+                    </tr>
+                    <tr style="background-color: rgb(205, 207, 211)">
+                      <th style="min-width: 4em">場所</th>
+                      <th>{{ group.case_name }}</th>
+                    </tr>
+
+                    <tr style="background-color: #f0f8ff">
+                      <th style="min-width: 4em">階段</th>
+                      <th>{{ group.main_section }}</th>
+                      <!-- <th *ngIf="!edit_row[i]">{{ group.main_section }}</th>
+                      <th *ngIf="edit_row[i]">
+                        <select [(ngModel)]="group.main_section" (change)="readSelectB(group.main_section,group.sec_section,i,group.AD_serial_number,group.project,group.project_2)">
+                          <option *ngFor="let option of list_a[i]" value="{{ option }}">{{ option }}</option>
+                        </select>
+                      </th> -->
+                    </tr>
+                    <tr style="background-color: #f0f8ff">
+                      <th style="min-width: 4em">任務</th>
+                      <th>{{ group.sec_section }}</th>
+                      <!-- <th *ngIf="!edit_row[i]">{{ group.sec_section }}</th>
+                      <th *ngIf="edit_row[i]">
+                        <select [(ngModel)]="group.sec_section" (change)="readSelectC(group.main_section,group.sec_section,i,group.AD_serial_number,group.project,group.project_2)">
+                          <option *ngFor="let option of list_b[i]" value="{{ option }}">{{ option }}</option>
+                        </select>
+                      </th> -->
+                    </tr>
+                    <tr style="background-color: #f0f8ff">
+                      <th style="min-width: 4em">項目</th>
+                      <th *ngIf="!edit_row[i]">{{ group.project }}</th>
+                      <th
+                        *ngIf="edit_row[i] && group.main_section != '現場會勘' && group.sec_section != '缺失改善' && group.main_section != '現場準備' && group.sec_section != '自主測試' && group.main_section != '現場準備' && group.sec_section != '改善確認'"
+                      >
+                        <select [(ngModel)]="group.project">
+                          <option
+                            *ngFor="let option of list_c[i]"
+                            value="{{ option }}"
+                          >
+                            {{ option }}
+                          </option>
+                        </select>
+                      </th>
+                      <th
+                        *ngIf="edit_row[i] && ((group.main_section == '現場會勘' && group.sec_section == '缺失改善') || (group.main_section == '現場準備' && group.sec_section == '自主測試') || (group.main_section == '現場準備' && group.sec_section == '改善確認'))"
+                        style="
+                          min-width: 4em;
+                          background-color: #f0f8ff;
+                          color: #000;
+                        "
+                      >
+                        {{ group.project }}
+                      </th>
+                    </tr>
+                    <tr style="background-color: #f0f8ff">
+                      <th style="min-width: 4em">備註</th>
+                      <th *ngIf="!edit_row[i]">{{ group.note }}</th>
+                      <th *ngIf="edit_row[i]">
+                        <textarea
+                          style="resize: none"
+                          [(ngModel)]="group.note"
+                        ></textarea>
+                      </th>
+                    </tr>
+
+                    <tr style="background-color: #fce5cd">
+                      <th style="min-width: 4em">拍攝者</th>
+                      <th>{{ group.account }}</th>
+                    </tr>
+                    <tr style="background-color: #fce5cd">
+                      <th style="min-width: 4em">日期</th>
+                      <th>{{ group.date }}</th>
+                    </tr>
+                    <tr style="background-color: #fce5cd">
+                      <th style="min-width: 4em">時間</th>
+                      <th>{{ group.time }}</th>
+                    </tr>
+                  </table>
+                </ng-template>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>

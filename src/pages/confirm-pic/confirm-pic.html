@@ -1,0 +1,66 @@
+<!--
+  Generated template for the ConfirmPicPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title start>{{ serial_num }}-{{ client_name }}-{{ case_name }}
+      <p id="title">{{ type_case }}＞圖資準備＞圖資確認</p>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="part =='a'">
+    <table style="width: 100%;text-align: center;margin-top: 20px;">
+      <thead>
+        <tr style="background-color: #44546a;border-bottom: white solid 1.5px;">
+          <th>序號</th>
+          <th>類型</th>
+          <th>項目</th>
+          <th>版次</th>
+          <th>預覽</th>
+          <th>確認</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let group of list; let i = index;'>
+          <td>{{ i+1 }}</td>
+          <td>{{ group['type'] }}</td>
+          <td>{{ group['item'] }}</td>
+          <td>{{ group['version'] }}</td>
+          <td><ion-icon ios="ios-eye" md="md-eye" (click)="view(group['type'],group['item'])"></ion-icon></td>
+          <td><ion-checkbox [(ngModel)]="group['comfirm']"></ion-checkbox></td>
+        </tr>
+      </tbody>
+    </table>
+    <button id="next" (click)="sendCheckSql()">確認</button>
+  </div>
+  <div *ngIf="part == 'b'">
+    <table style="width: 95%;text-align: center;margin-top: 100px;margin-left: auto;margin-right: auto;">
+      <thead>
+        <tr style="background-color: #44546a;border: rgb(163,171,184) solid 1px;">
+          <td>階段作業　備註</td>
+          </tr>
+      </thead>
+      <tbody>
+        <tr style="height: 10em;">
+          <td>
+            <textarea style="width: 100%;height: 20em;resize: none;border: none;text-align-last:left ;color: black;background-color: rgb(232,233,234);" [(ngModel)]="section_note" placeholder="請輸入..."></textarea>
+          </td>
+        </tr>
+        <tr style="border: solid 1px white;background-color: white;">
+          <td style="border: solid 1px white;">
+            <button id="sendto" (click)="saveSectionNote()">確定</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button *ngIf="part == 'a'" id="next_1" (click)="mail()"><ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon></button>
+  <button *ngIf="part == 'b'" id="next2" (click)="mail2()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon></button>
+  
+</ion-content>

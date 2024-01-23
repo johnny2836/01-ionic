@@ -1,0 +1,212 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons end>
+      <button id="bms_go" (click)="bmsGo()">
+        <img src="assets/imgs/camera.png" alt="" />
+      </button>
+      <button ion-button icon-only (click)="openAlert()">
+        <ion-icon
+          *ngIf="alert_status;else noAlert"
+          name="notifications"
+          class="spark"
+        >
+          <!-- <ion-badge *ngIf="alert_status" style="position: absolute;font-weight: bold;left: 15px;font-size: 12px;top:3px" color="danger">!</ion-badge> -->
+        </ion-icon>
+        <ng-template #noAlert>
+          <ion-icon name="notifications"></ion-icon>
+        </ng-template>
+      </button>
+      <button ion-button icon-only (click)="openFirst()">
+        <ion-icon name="md-settings"></ion-icon>
+      </button>
+      <!-- <button ion-button icon-only (click)="logout()">
+        <ion-icon name="md-exit"></ion-icon>
+      </button> -->
+      <p>使用者：{{ depart }}-{{ user }}</p>
+    </ion-buttons>
+    <ion-title start>熙 特 爾 數 位 經 營 管 理</ion-title>
+  </ion-navbar>
+
+  <ion-item
+    style="
+      border-bottom: rgb(180, 180, 180) solid 1px;
+      background-color: rgb(248, 248, 248);
+      min-height: 135px !important;
+    "
+  >
+    <!-- 第一層 -->
+    <div
+      style="display: flex; width: 100%; margin-left: auto; margin-right: auto"
+    >
+      <button id="hTitle" (click)="chType()">未來案件</button>
+      <button id="hTitle" (click)="chType()">案件總覽</button>
+    </div>
+    <!-- 第二層 -->
+    <!-- <div
+      style="display: flex; width: 100%; margin-left: auto; margin-right: auto"
+    >
+      <button
+        id="hTitle_0"
+        [ngStyle]="{'background-color': ch_color[1],'color': color[1]}"
+        ion-button
+        (click)="chType0(0)"
+      >
+        室內裝修
+      </button>
+      <button
+        id="hTitle_0"
+        [ngStyle]="{'background-color': ch_color[2],'color': color[2]}"
+        ion-button
+        (click)="chType1(1)"
+      >
+        用途變更
+      </button>
+      <button
+        id="hTitle_0"
+        [ngStyle]="{'background-color': ch_color[4],'color': color[4]}"
+        ion-button
+        (click)="chType3(3)"
+      >
+        新建工程
+      </button>
+      <button
+        id="hTitle_0"
+        [ngStyle]="{'background-color': ch_color[3],'color': color[3]}"
+        ion-button
+        (click)="chType2(2)"
+      >
+        檢修案件
+      </button>
+      <button
+        id="hTitle_0"
+        [ngStyle]="{'background-color': ch_color[6],'color': color[6]}"
+        ion-button
+        (click)="chType4(4)"
+      >
+        修繕案件
+      </button>
+      <button
+        id="hTitle_0"
+        [ngStyle]="{'background-color': ch_color[5],'color': color[5]}"
+        ion-button
+        (click)="chContact(4)"
+      >
+        權限管理
+      </button>
+    </div> -->
+    <!-- 第三層 -->
+    <!-- <div
+      style="
+        display: flex;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: space-between;
+      "
+      *ngIf='chv=="-1"'
+    >
+      <div>
+        <button
+          id="hTitle_0"
+          [ngStyle]="{'background-color': ch_color_1[1],'color': color_1[1]}"
+          ion-button
+          (click)="ChType0(1)"
+        >
+          進度總表
+        </button>
+        <button
+          id="hTitle_0"
+          [ngStyle]="{'background-color': ch_color_1[2],'color': color_1[2]}"
+          ion-button
+          (click)="ChType0(2)"
+        >
+          待辦行程
+        </button>
+        <button
+          id="hTitle_0"
+          [ngStyle]="{'background-color': ch_color_1[3],'color': color_1[3]}"
+          ion-button
+          (click)="ChType0(3)"
+        >
+          進度管理
+        </button>
+        <button
+          *ngIf="web_auth[0] == 1"
+          id="hTitle_0"
+          [ngStyle]="{'background-color': ch_color_1[0],'color': color_1[0]}"
+          ion-button
+          (click)="ChType0(0)"
+        >
+          任務指派
+        </button>
+        <button
+          id="hTitle_0"
+          [ngStyle]="{'background-color': ch_color_1[4],'color': color_1[4]}"
+          ion-button
+          (click)="ChType0(4)"
+        >
+          照片總覽
+        </button>
+      </div>
+      <div
+        *ngIf='chvv=="0" || chvv=="3" || chvv=="4"'
+        style="display: inline-flex"
+      >
+        <ng-container *ngIf='user=="李惠閔" || user=="洪舒寧"'>
+          <span>
+            <ion-icon
+              style="font-size: 35px; display: flex"
+              ios="ios-alert"
+              md="md-alert"
+              id="alert"
+              (click)="addAlert()"
+            >
+              <div *ngIf="total_num>0" class="sparkNum">{{ total_num }}</div>
+            </ion-icon>
+          </span>
+          <button id="edit" ion-button (click)="add(-1)">新增</button>
+          <button id="edit" ion-button (click)="update(-1)">編輯</button>
+          <button id="edit" ion-button (click)="deleteCase()">刪除</button>
+        </ng-container>
+      </div>
+      <div *ngIf='chvv=="1" && chart==0' style="display: flex">
+        <div style="display: flex; justify-content: space-around">
+          <ion-icon
+            style="margin-right: 15px"
+            (click)="searchShow()"
+            id="chart"
+            name="search"
+          >
+          </ion-icon>
+          <ion-icon
+            *ngIf="search"
+            style="margin-top: 10px; margin-right: 10px"
+            id="arrowup"
+            (click)="searchShow()"
+            name="ios-arrow-forward"
+          ></ion-icon>
+          <ion-searchbar
+            *ngIf="search"
+            type="tel"
+            [(ngModel)]="chart_search_val"
+            placeholder="搜尋"
+            (ionInput)="chartSearch($event)"
+            (ionCancel)="recover_chart_search()"
+            style="
+              margin-top: -10px;
+              margin-right: 10px;
+              background-color: #ebe9e9;
+              border-radius: 5px;
+            "
+          ></ion-searchbar>
+        </div>
+        <ion-icon
+          (click)="chartChange()"
+          id="chart"
+          ios="ios-stats"
+          md="md-stats"
+        ></ion-icon>
+      </div>
+    </div> -->
+  </ion-item>
+</ion-header>

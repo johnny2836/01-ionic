@@ -1,0 +1,95 @@
+page-assign-mission {
+    table{
+        width:100%;
+        font-size:1.4vh;
+        @media (min-width: 768px) {
+          font-size:1.6vh;
+          width:100%;
+          margin-left:auto;
+          margin-right:auto;
+          }  
+    }
+    #th_odd:nth-child(odd){
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: 30px;
+        background:rgb(68,84,106);
+        color: #FFF;
+        min-width: 150px;
+        border: white solid 1px;
+    }
+    #th_odd:nth-child(even){
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: 30px;
+        background:rgb(68,84,106);
+        color: #FFF;
+        min-width: 150px;
+        border: white solid 1px;
+    }
+    #th_even:nth-child(odd){
+        top: 30px;
+    }
+    #th_even:nth-child(even){
+        top: 30px;
+    }
+    #tr_odd{
+        background-color:rgb(232,233,234);
+        font-size: 18px;
+    }
+    #tr_odd1{
+        background-color:rgb(205,207,211);
+        font-size: 18px;
+    }
+    tr:nth-child(even){
+        background:rgb(205,207,211);
+    }
+    #section_odd:nth-child(odd){
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: -10px;
+        background:rgb(68,84,106);
+        color: #FFF;
+        min-width: 150px;
+        border: white solid 1px;
+    }
+    thead th {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: -10px;
+        background:rgb(50,63,79);
+        color: #FFF;
+        min-width: 200px;
+        border: white solid 1px;
+        height: 60px;
+        font-size: 20px;
+        // border-bottom: white solid 4px;
+      }
+      tbody{
+        background:rgb(205,207,211);
+        min-width: 150px;
+        border: white solid 1px;
+        height: 40px;
+        font-size: 16.5px;
+      }
+      tr{
+          border: solid 1px white;
+        //   height: 40px;
+      }
+      th{
+          border: white solid 1px;
+          height: 40px;
+      }
+      ion-icon:hover{
+        cursor: pointer;
+        color: rgb(143, 143, 143);
+      }
+      #title{
+          font-size: 16px;
+          margin-top: 10px;
+      }
+      ion-title{
+        margin-top: 10px;
+      }  
+
+}

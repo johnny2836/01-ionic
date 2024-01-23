@@ -1,0 +1,104 @@
+page-login {
+  #top_image {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        135deg,
+        rgba(30, 33, 33, 0.82) 1%,
+        rgba(32, 32, 32, 0.14) 98%
+      ),
+      url(https://ici-biot.com/ici/ap/ionic_app/CK_platform/Php/assets/imgs/background.png);
+    background-position: 0px 0px, 50% 50%;
+    background-size: auto, cover;
+  }
+  .bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -999;
+  }
+  .bg img {
+    height: 100%;
+    width: 100%;
+  }
+  @media screen and (max-width: 1000px) {
+    img.bg {
+      left: 50%;
+      margin-left: -500px;
+    }
+  }
+  .title {
+    margin-top: 200px;
+    margin-left: 250px;
+    float: left;
+  }
+  .bar {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 1000px;
+  }
+  h1 {
+    color: white;
+    z-index: 9999;
+    letter-spacing: 30px;
+    animation-name: bounceIn;
+    animation-duration: 810ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3) translate3d(0, 0, 0);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(0.89);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+  }
+  .text-input::-moz-placeholder {
+    color: rgb(70, 70, 70);
+  }
+  .text-input:-ms-input-placeholder {
+    color: rgb(70, 70, 70);
+  }
+  .text-input::-webkit-input-placeholder {
+    text-indent: 0;
+    color: rgb(70, 70, 70);
+  }
+  ion-item {
+    font-size: 2vh;
+  }
+  ion-item:hover {
+    font-size: 1.5vh;
+    transition: 0.2s;
+  }
+  ion-grid {
+    z-index: 100;
+    position: absolute;
+    margin-top: 380px;
+    right: -280px;
+  }
+  button {
+    margin-top: 50px;
+    font-size: 1.2em;
+    background: none;
+    color: white;
+    width: 100px;
+    height: 40px;
+  }
+  button:hover {
+    border: rgb(185, 185, 185) solid 1px;
+    transition: 0.3s;
+  }
+}

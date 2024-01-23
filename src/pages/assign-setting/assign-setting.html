@@ -1,0 +1,594 @@
+<!--
+  Generated template for the AssignSettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="type_status == '其他'"
+      >{{ case_type }} : {{ client_name }} - {{ case_name }} > {{ B_section }} >
+      {{ section }}</ion-title
+    >
+    <ion-title *ngIf="type_status == '檢修' || type_status == '修繕'"
+      >{{ case_type }} : {{ client_name }} - {{ case_name }} > {{ B_section
+      }}</ion-title
+    >
+  </ion-navbar>
+  <ion-item
+    style="
+      border-bottom: rgb(180, 180, 180) solid 1px;
+      background-color: rgb(248, 248, 248);
+      min-height: 55px !important;
+    "
+  >
+    <button *ngIf="edit==1" id="edit" ion-button (click)="save()">儲存</button>
+    <button *ngIf="edit==0" id="edit" ion-button (click)="setting()">
+      編輯
+    </button>
+  </ion-item>
+</ion-header>
+
+<ion-content padding>
+  <table>
+    <tr>
+      <ng-container *ngFor="let bar of bar; let i =index">
+        <th>{{ bar }}</th>
+      </ng-container>
+    </tr>
+    <tr>
+      <ng-container *ngFor="let group2 of case_data; let i =index">
+        <td>{{ group2['AD_group'] }}</td>
+        <td>{{ group2['AD_actual_use'] }}</td>
+        <td>{{ group2['AD_uniform'] }}</td>
+        <td>{{ group2['AD_address'] }}</td>
+        <td>{{ group2['AD_main'] }}</td>
+        <td>{{ group2['AD_phone'] }}</td>
+        <td>{{ group2['AD_main'] }}</td>
+        <td>{{ group2['AD_telephone'] }}</td>
+      </ng-container>
+    </tr>
+
+    <tr>
+      <ng-container *ngFor="let bar of bar_1; let i =index">
+        <th>{{ bar }}</th>
+      </ng-container>
+      <th colspan="3">說明</th>
+    </tr>
+    <tr>
+      <td *ngIf="edit==0">{{ main }}</td>
+      <td *ngIf="edit==1">
+        <select
+          [(ngModel)]="corporate"
+          style="min-width: 50%"
+          (change)="loadMainList()"
+        >
+          <option
+            *ngFor="let option of coor_list;let i =index"
+            value="{{ option }}"
+          >
+            {{ option }}
+          </option>
+        </select>
+        <select [(ngModel)]="main" style="min-width: 50%">
+          <option *ngFor="let option of list;let i =index" value="{{ option }}">
+            {{ option }}
+          </option>
+        </select>
+      </td>
+      <td *ngIf="edit==0">{{ assis }}</td>
+      <td *ngIf="edit==1">
+        <select [(ngModel)]="assis">
+          <option *ngFor="let option of list;let i =index" value="{{ option }}">
+            {{ option }}
+          </option>
+        </select>
+      </td>
+      <td *ngIf="edit==0">{{ alert_date }}</td>
+      <td *ngIf="edit==1">
+        <input type="date" [(ngModel)]="alert_date" />
+      </td>
+      <td *ngIf="edit==0">{{ start_date }}</td>
+      <td *ngIf="edit==1">
+        <input type="date" [(ngModel)]="start_date" />
+      </td>
+      <td *ngIf="edit==0">{{ finish_date }}</td>
+      <td *ngIf="edit==1">
+        <input type="date" [(ngModel)]="finish_date" />
+      </td>
+      <td *ngIf="edit==0" colspan="3">{{ note }}</td>
+      <td *ngIf="edit==1" colspan="3">
+        <textarea [(ngModel)]="note"></textarea>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr *ngIf='coor=="設計部"'>
+      <ng-container *ngFor="let bar of bar_2; let i =index">
+        <th colspan="4">{{ bar }}</th>
+      </ng-container>
+    </tr>
+    <tr *ngIf='coor=="設計部"'>
+      <td *ngIf="edit==0" colspan="4">{{ dd_t1 }}</td>
+      <td *ngIf="edit==1" colspan="4">
+        <ng-container *ngFor="let check of file; let i =index">
+          <label
+            ><input
+              type="checkbox"
+              value="{{ check }}"
+              [(ngModel)]="design_T1[i]"
+            />
+            {{ check }}</label
+          >
+        </ng-container>
+      </td>
+      <td *ngIf="edit==0" colspan="4">{{ dd_t2 }}</td>
+      <td *ngIf="edit==1" colspan="4">
+        <ng-container *ngFor="let check of pic; let i =index">
+          <label
+            ><input
+              type="checkbox"
+              value="{{ check }}"
+              [(ngModel)]="design_T2[i]"
+            />
+            {{ check }}</label
+          >
+        </ng-container>
+      </td>
+    </tr>
+
+    <tr *ngIf='coor=="設備安裝" || coor=="自主查驗"'>
+      <th colspan="8">確認設備</th>
+    </tr>
+    <ng-container *ngIf='coor=="設備安裝" && edit==1'>
+      <tr>
+        <td colspan="2" rowspan="2">滅火設備</td>
+        <td>滅火器</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a1; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="滅火器-{{ check }}"
+                [(ngModel)]="work_T1[1][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>室內消防栓</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a2; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="室內消防栓-{{ check }}"
+                [(ngModel)]="work_T1[0][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" rowspan="3">警報設備</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a6; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T1[2][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>住警器</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a4; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="住警器-{{ check }}"
+                [(ngModel)]="work_T1[4][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>綜合盤</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a3; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="綜合盤-{{ check }}"
+                [(ngModel)]="work_T1[3][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" rowspan="2">避難逃生設備</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a7; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T1[6][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>緩降機</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a5; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="緩降機-{{ check }}"
+                [(ngModel)]="work_T1[5][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">其他</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_a8; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="其他-{{ check }}"
+                [(ngModel)]="work_T1[7][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf='coor=="設備安裝" && edit==0'>
+      <tr>
+        <td colspan="2" rowspan="2">滅火設備</td>
+        <td>滅火器</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["滅火器"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>室內消防栓</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["室內消防栓"];let i = index;'
+              >{{ i+1 }}.{{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" rowspan="3">警報設備</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["警報設備"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>住警器</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["住警器"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>綜合盤</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["綜合盤"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" rowspan="2">避難逃生設備</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["避難逃生設備"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>緩降機</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["緩降機"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">其他</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool;">
+            <label *ngFor='let check of check1["其他"];let i = index;'
+              >{{ i+1 }}.{{ check }}　</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf='coor=="自主查驗" && edit==1'>
+      <tr>
+        <td colspan="2">滅火設備</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_b1; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T1[0][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">警報設備</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_b2; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T1[1][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">避難逃生設備</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_b3; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T1[2][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">其他</td>
+        <td colspan="6">
+          <ng-container *ngFor="let check of tool_b4; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T1[3][i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf='coor=="自主查驗" && edit==0'>
+      <tr>
+        <td colspan="2">滅火設備</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool_b;">
+            <label *ngFor='let check of check1["滅火設備"];let i = index;'
+              >{{ i+1 }}.{{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">警報設備</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool_b;">
+            <label *ngFor='let check of check1["警報設備"];let i = index;'
+              >{{ i+1 }}.{{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">避難逃生設備</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool_b;">
+            <label *ngFor='let check of check1["避難逃生設備"];let i = index;'
+              >{{ i+1 }}.{{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">其他</td>
+        <td colspan="6" style="text-align: start; padding: 0 0 0 20px">
+          <ng-container *ngFor="let check1 of vis_tool_b;">
+            <label *ngFor='let check of check1["其他"];let i = index;'
+              >{{ i+1 }}.>{{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+
+    <tr
+      *ngIf='coor=="工務部_1" || coor=="工務部_2" || (B_section=="設備修繕" && section=="")'
+    >
+      <th colspan="2">攜帶文件</th>
+      <ng-container *ngFor="let bar of bar_2A; let i =index">
+        <th colspan="3">{{ bar }}</th>
+      </ng-container>
+    </tr>
+    <tr
+      *ngIf='coor=="工務部_1" || coor=="工務部_2" || (B_section=="設備修繕" && section=="")'
+    >
+      <td *ngIf="edit==0" colspan="2">{{ ww_t1 }}</td>
+      <td *ngIf="edit==1" colspan="2">
+        <ng-container *ngFor="let check of file; let i =index">
+          <label
+            ><input
+              type="checkbox"
+              value="{{ check }}"
+              [(ngModel)]="work_T1[i]"
+            />
+            {{ check }}</label
+          >
+        </ng-container>
+      </td>
+      <td *ngIf="edit==0" colspan="3">{{ ww_t2 }}</td>
+      <td *ngIf="edit==1" colspan="3">
+        <ng-container *ngFor="let check of pic; let i =index">
+          <label
+            ><input
+              type="checkbox"
+              value="{{ check }}"
+              [(ngModel)]="work_T2[i]"
+            />
+            {{ check }}</label
+          >
+        </ng-container>
+      </td>
+      <td *ngIf="edit==0" colspan="3">{{ ww_t3 }}</td>
+      <td *ngIf="edit==1" colspan="3">
+        <ng-container *ngFor="let check of tool; let i =index">
+          <label
+            ><input
+              type="checkbox"
+              value="{{ check }}"
+              [(ngModel)]="work_T3[i]"
+            />
+            {{ check }}</label
+          >
+        </ng-container>
+      </td>
+    </tr>
+
+    <ng-container *ngIf='coor=="工務部_1"'>
+      <tr>
+        <th colspan="8">拍照記錄</th>
+      </tr>
+      <tr>
+        <td *ngIf="edit==0" colspan="8">{{ ww_t4 }}</td>
+        <td *ngIf="edit==1" colspan="8">
+          <ng-container *ngFor="let check of camera; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T4[i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+          <br />
+          <label
+            ><ion-checkbox (ionChange)="add($event)"></ion-checkbox> 自訂:
+          </label>
+          <ng-container *ngIf="self_add_check.length >0">
+            <ng-container *ngFor="let check of self_add_check; let i =index">
+              <label>{{ check }}</label>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let check of self_add_arr; let i =index">
+            <label>
+              <input
+                type="text"
+                placeholder="請輸入"
+                [(ngModel)]="self_add_arr[i]['data']"
+            /></label>
+          </ng-container>
+          <ion-icon
+            *ngIf="add_status"
+            name="add-circle"
+            style="cursor: pointer; font-size: 1.4em"
+            (click)="selfAdd()"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="add_status && self_add_arr.length>0"
+            name="remove-circle"
+            style="cursor: pointer; font-size: 1.4em"
+            (click)="selfPop()"
+          ></ion-icon>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf='coor=="工務部_2"'>
+      <tr>
+        <th colspan="8">協調事項</th>
+      </tr>
+      <tr>
+        <td *ngIf="edit==0" colspan="8">{{ ww_t5 }}</td>
+        <td *ngIf="edit==1" colspan="8">
+          <ng-container *ngFor="let check of consort; let i =index">
+            <label
+              ><input
+                type="checkbox"
+                value="{{ check }}"
+                [(ngModel)]="work_T5[i]"
+              />
+              {{ check }}</label
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+
+    <tr *ngIf='coor=="現場準備"'>
+      <th colspan="8">攜帶工具</th>
+    </tr>
+    <tr *ngIf='coor=="現場準備"'>
+      <td colspan="8" *ngIf="edit==0">{{ ww_t1 }}</td>
+      <td colspan="8" *ngIf="edit==1">
+        <ng-container *ngFor="let check of tool_b; let i =index">
+          <label
+            ><input
+              type="checkbox"
+              value="{{ check }}"
+              [(ngModel)]="work_T1[i]"
+            />
+            {{ check }}</label
+          >
+        </ng-container>
+      </td>
+    </tr>
+  </table>
+</ion-content>

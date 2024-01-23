@@ -1,0 +1,255 @@
+page-upload-p {
+  p{
+    font-size: 16px;
+  }
+  #title{
+    margin-top: 10px;
+  }
+    #hTitle{
+        font-size:1.08em;
+        font-weight:400;
+        color: white;
+      }
+      #hTitle1{
+        font-size:1.08em;
+        font-weight:400;
+        color: rgb(206, 206, 206);
+      }
+      #hTitle2{
+        margin-top:2px;
+        margin-right:10px;
+        font-size:1.2em;
+        width:200px;
+        float: left;
+        border-radius:5px;
+        height: 38px;
+        font-weight:400;
+        color: white;
+      }
+      #hTitle_0{
+        // margin-top:2px;
+        margin-right:10px;
+        font-size:1.08em;
+        width:100px;
+        float: right;
+        border-radius:2px;
+        height: 28px;
+        font-weight:400;
+        color: black;
+      }  
+      select{
+          font-size:1.08em;
+          width: 100px;
+          height: 28px;
+          margin-top: 12px;
+          margin-right: 15px;
+          border-radius:2px;
+          margin-left: 1px;
+        //   background-color: rgb(205,207,211);
+          border: 1.5px solid rgb(205,207,211);
+      }
+      #third{
+        font-size:1.08em;
+        width: 280px;
+        height: 28px;
+        margin-top: 5px;
+        margin-right: 10px;
+        border-radius:2px;
+        margin-left: 1px;
+        //   background-color: rgb(205,207,211);
+          border: 1.5px solid rgb(205,207,211);
+      }
+      #edit{
+        margin-top: -25px;
+        position: fixed;
+        right: 2em;
+        font-size:1.08em;
+        width: 80px;
+        height: 28px;
+        background-color: rgb(205,207,211);
+        color: black;
+      }
+      #edit1{
+        margin-top: -25px;
+        position: fixed;
+        right: 8em;
+        font-size:1.08em;
+        width: 80px;
+        height: 28px;
+        background-color: rgb(205,207,211);
+        color: black;
+      }
+      #edit:hover{
+        background-color:rgb(68,84,106);
+        color: white;
+      }
+      #edit1:hover{
+        background-color:rgb(68,84,106);
+        color: white;
+      }
+      thead{
+        background-color: black;
+        color: white;
+      }
+      th{
+        // border: 2px solid white;
+        // height: 45px;
+        border-radius: 2px;
+        font-size: 1.1em;
+      }
+      tr:nth-child(odd){
+        background:rgb(163,171,184);
+        height: 50px;
+        border: 0.5px solid white;
+      }
+      tr:nth-child(even){
+        background:rgb(225,226,235);
+        height: 50px;
+        border: 0.5px solid white;
+      }
+      td{
+        border:0.5px solid #44546a;
+      }
+      #right{
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+      }
+      #send{
+        font-size: 1.3em;
+        border-radius: 5px;
+        margin: auto;
+        background-color: cadetblue;
+        color: whitesmoke;
+        box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 1.5em;
+        width: 3em;
+      }
+      #send:hover{
+        background-color: rgb(76, 127, 129);
+      }
+      #next{
+        font-size: 1.3em;
+        border-radius: 25px;
+        // margin: auto;
+        // background-color: cadetblue;
+        // box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 2.5em;
+        width: 3em;
+        margin-top: 20px;
+        float: right;
+      }
+      #next:hover{
+        background-color: rgb(191, 191, 191);
+      }
+      #add_item{
+        font-size: 1.3em;
+        border-radius: 25px;
+        // margin: auto;
+        background-color: cadetblue;
+        color: whitesmoke;
+        box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 2.5em;
+        width: 3em;
+        margin-top: 20px;
+        float: right;
+      }
+      #add_item:hover{
+        background-color: rgb(76, 127, 129);
+      }
+      #next2{
+        font-size: 1.3em;
+        border-radius: 25px;
+        // margin: auto;
+        background-color: cadetblue;
+        color: whitesmoke;
+        box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 2.5em;
+        width: 3em;
+        margin-top: -20px;
+        float: left;
+      }
+      #next2:hover{
+        background-color: rgb(76, 127, 129);
+      }
+      #next3{
+        font-size: 1.3em;
+        border-radius: 25px;
+        // margin: auto;
+        background-color: cadetblue;
+        color: whitesmoke;
+        box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 2.5em;
+        width: 3em;
+        margin-top: -20px;
+        float: right;
+      }
+      #next3:hover{
+        background-color: rgb(76, 127, 129);
+      }
+      #custom-tooltip{
+        display: none;
+        margin-left: -20px;
+        padding: 5px 12px;
+        background-color: #3f3f3fdf;
+        border-radius: 10px;
+        color: #fff;
+        cursor: default;
+      }
+      #sendto{
+        font-size: 1em;
+        border-radius: 10px;
+        background-color: cadetblue;
+        box-shadow:1.5px 1.5px 0 0 #cccccc;
+        height: 2.3em;
+        width: 5em;
+        color: white;
+      }
+      #sendto:hover{
+        background-color: rgb(76, 127, 129);
+      }
+      .ion-md-copy:before {
+        font-size: 130%;
+        margin-right: -10px;
+      }
+      #send_td{
+        height: 4em;
+        background-color: white;
+        text-align: center;
+      }
+      table{
+        width: 100%;
+        height: 150%;
+        font-size: 16px;
+        border: none;
+        // border-collapse: separate;
+        border-spacing: 0;
+        table-layout: fixed;
+      }
+      .btn{
+        font-size: xx-large;
+      }
+      ion-icon:hover{
+        cursor: pointer;
+        color: gray;
+      }
+      .button-md{
+        background: rgb(232,233,234);
+      }
+      .text-input::-moz-placeholder {
+        color: rgb(70, 70, 70);
+      }
+      .text-input:-ms-input-placeholder {
+        color: rgb(70, 70, 70);
+      }
+      .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color: rgb(70, 70, 70);
+      }
+      input{
+        margin-top: 10px;
+        height: 30px;
+        margin-left: -10px;
+      }
+
+}

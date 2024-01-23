@@ -1,0 +1,96 @@
+<!--
+  Generated template for the LittleWorkPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title start>{{ serial_num }}-{{ client_name }}-{{ case_name }}</ion-title>
+    <p *ngIf="all_status == '簡易回報' && sec_section != ''" id="title">{{ main_section }}＞{{ sec_section }}</p>
+    <p *ngIf="all_status == '簡易回報' && sec_section == ''" id="title">{{ main_section }}</p>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf="all_status == '簡易回報'">
+    <table>
+      <tr style="background-color: #44546a;">
+        <th>{{ th_A }}</th>
+      </tr>
+      <tr>
+        <td *ngIf="th_A == '回報狀態'">
+          <select [(ngModel)]="call_back">
+            <option value="進行中">進行中</option>
+            <option value="已完成">已完成</option>
+          </select>
+        </td>
+        <td *ngIf="th_A == '回報日期' || th_A == '掛件日期' 
+        || th_A == '承辦日期' || th_A == '發文日期' 
+        || th_A == '文件日期' || th_A == '預約日期' 
+        || th_A == '指派日期' || th_A == '申報日期' 
+        || th_A == '到貨日期' || th_A == '進場日期'">
+          <input [(ngModel)]="call_back" type="date">
+        </td>
+      </tr>
+      <tr><th></th></tr>
+      <ng-container *ngIf="upload_file == true">
+        <tr style="background-color: #44546a;">
+          <th>檔案上傳 <ion-icon id="upload" name="cloud-upload" (click)="file.click()" style="cursor: pointer;"></ion-icon></th>
+        </tr>
+        <tr style="width: 96%;display: flex;flex-wrap: wrap;margin-left: 4%;">
+          <div style="width: 15%;margin-right: 1%;position: relative;" *ngFor="let group of url;let i = index">
+            <ion-icon name="md-close" style="color: red;font-weight: bolder;font-size: 30px;position:absolute;top:0;right: 0;cursor: pointer;" (click)="deleteFile(i)"></ion-icon>
+            <img [src]="img_list[i]" alt="" style="width: 150px;height: 170px;margin-top: 10px;" (click)="view(group)">
+            <p class="overflow">{{ file_list[i] }}</p>
+          </div>
+        </tr>
+      </ng-container>
+      <tr><th></th></tr>
+      <tr style="background-color: #44546a;">
+        <th>備註</th>
+      </tr>
+      <tr>
+        <td>
+          <textarea [(ngModel)]="note" style="resize: none;" cols="30" rows="10" placeholder="請輸入..."></textarea>
+        </td>
+      </tr>
+      <tr style="border: solid 1px white;background-color: white;">
+        <td style="border: solid 1px white;background-color: white;" colspan="2">
+          <button id="sendto" (click)="save()">送出</button>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+  <ng-container *ngIf="all_status == '結案編輯'">
+    <table>
+      <tr style="background-color: #44546a;">
+        <th>結案狀態</th>
+      </tr>
+      <tr>
+        <td>
+          <select [(ngModel)]="closed_status">
+            <option value="作業中">作業中</option>
+            <option value="已結案">已結案</option>
+          </select>
+        </td>
+      </tr>
+      <tr style="background-color: #44546a;">
+        <th>結案原因</th>
+      </tr>
+      <tr>
+        <td>
+          <textarea [(ngModel)]="closed_note" style="resize: none;" cols="30" rows="10" placeholder="請輸入..."></textarea>
+        </td>
+      </tr>
+      <tr style="border: solid 1px white;background-color: white;">
+        <td style="border: solid 1px white;background-color: white;" colspan="2">
+          <button id="sendto" (click)="saveClose()">送出</button>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+
+  <input type="file" id="attachment" style="visibility:hidden;display:none;" #file name="attachment" (change)="fileChange($event)" multiple>
+
+</ion-content>

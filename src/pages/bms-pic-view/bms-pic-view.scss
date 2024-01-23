@@ -1,0 +1,223 @@
+page-bms-pic-view {
+    #bms_go{
+        position: fixed;
+        top: 2px;
+        left: 6em;
+        background-color: rgb(248, 248, 248);
+    }
+    #bms_go:hover{
+        background-color: white;
+    }
+    #allmarket{
+        position: fixed;
+        top: 2px;
+        left: 3em;
+        background-color: rgb(248, 248, 248);
+    }
+    #allmarket:hover{
+        background-color: white;
+    }
+    img{
+        height: 25px;
+    }
+    span{
+        cursor: pointer;
+        font-size: 1.08em;
+        font-weight: bold;
+    }
+    span:hover{
+        border-bottom: 1px solid gray;
+        color: gray;
+    }
+    p{
+        font-weight: bold;
+        font-size: 15px;
+        margin-right: 10px;
+    }
+    select{
+        width: 180px;
+    }
+    #icon{
+        background-color:rgb(248, 248, 248);
+        font-size: 1.4em;
+        // margin-left: 10px;
+        // margin-right: 3px;
+    }
+    #icon:hover{
+        cursor: pointer;
+        // background-color: white;
+        color: rgb(75, 75, 75);
+    }
+
+    #chv0{
+        font-size: 1.08em;
+        text-align: center;
+        width:100%;
+        margin-top:5px;
+        margin-right:auto;
+        margin-left: auto;
+        @media (min-width: 740px) {
+          width:100%;
+          margin-top:5px;
+          margin-right:auto;
+          margin-left: auto;
+          font-size: 1.08em;
+        }  
+        thead tr{
+            color: white;
+            background-color: rgb(68,84,106);
+            height: 50px;
+            font-size: 1.1em;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            th{
+                border: solid 1px white;
+            }
+        }
+        tbody tr:nth-child(odd){
+            background-color:rgb(205,207,211);
+            height: 50px;
+        }
+        tbody tr:nth-child(even){
+            background-color:rgb(232,233,234);
+            height: 50px;
+        }
+        tbody td{
+            border: solid 1px white;
+        }
+    }
+    #chv1{
+        font-size: 1.08em;
+        text-align: center;
+        width:100%;
+        margin-top:-10px;
+        margin-right:auto;
+        margin-left: auto;
+        @media (min-width: 740px) {
+          width:100%;
+          margin-top:-10px;
+          margin-right:auto;
+          margin-left: auto;
+          font-size: 1.08em;
+        } 
+        tr:nth-child(odd){
+            background-color:rgb(205,207,211);
+            height: 30px;
+        }
+        tr:nth-child(even){
+            background-color:rgb(232,233,234);
+            height: 30px;
+        }
+        th{
+            border: solid 1px rgb(255, 255, 255);
+        }
+    }
+
+    #col{
+        height: 45px;
+        text-align: center;
+    }
+    .col:hover .img{
+        width: 21em;
+        height:19em;
+        transition: 0.4s;
+        cursor:zoom-in
+    }
+    .tooltip {
+        position: relative;
+        // display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+      
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 320px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 10;
+        top: -5px;
+        left: 110%;
+    }
+    
+    .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent black transparent transparent;
+    }
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+    .img{
+        width: 22em;
+        height:20em;
+    }
+    #trash:hover{
+        color:red;
+        cursor: pointer;
+    }
+    #ontput{
+        margin-left: 10px;
+        font-size: 1.08em;
+        background-color: #daeef3;
+        border-radius: 5px;
+        border: solid 1px black;
+    }
+    #ontput:hover{
+        background-color:rgb(194, 239, 248);
+        cursor: pointer;
+    }
+    #cancel{
+        margin-left: 10px;
+        font-size: 1.08em;
+        background-color: #000;
+        border-radius: 5px;
+        border: solid 1px black;
+        color: #FFF;
+    }
+    #cancel:hover{
+        background-color: rgb(79, 79, 79);
+    }
+    #upload{
+        background: none;
+        margin-left: 10px;
+        font-size: 1.8em;
+        color: #000;
+    }
+    #upload:hover{
+        color: rgb(79, 79, 79);
+        cursor: pointer;
+    }
+
+    .sort {
+        img{
+            margin-top: -15px;
+        }
+        img:hover{
+            background-color: #cfcfcf;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    }
+    .show_box{
+        background-color:#cfcfcf;
+        // width: 40%;
+        height: 80%;
+        padding: 10px;
+        table{
+            width: 20%;
+        }
+    }
+
+
+}

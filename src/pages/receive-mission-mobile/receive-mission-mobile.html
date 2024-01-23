@@ -1,0 +1,45 @@
+<!--
+  Generated template for the ReceiveMissionMobilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>任務接收</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="yesReceive()">確認</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding style="text-align: center">
+  <table>
+    <thead>
+      <tr>
+        <th>客戶</th>
+        <th>場所</th>
+        <th>類型</th>
+        <th>主階</th>
+        <th>子階</th>
+        <th>主辦</th>
+        <th>協辦</th>
+        <th>接收</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let group of mission;let i =index;">
+        <tr>
+          <td>{{ group['AD_client_name'] }}</td>
+          <td>{{ group['AD_case_name'] }}</td>
+          <td>{{ group['AD_type'] }}</td>
+          <td>{{ group['AD_main_section'] }}</td>
+          <td>{{ group['AD_sec_section'] }}</td>
+          <td>{{ group['AD_main'] }}</td>
+          <td>{{ group['AD_assis'] }}</td>
+          <td><input type="checkbox" [(ngModel)]="group['checkbox']" /></td>
+          <!-- <td><ion-checkbox (ionChange)="yesReceive($event, group['AD_id'])"></ion-checkbox></td> -->
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</ion-content>
